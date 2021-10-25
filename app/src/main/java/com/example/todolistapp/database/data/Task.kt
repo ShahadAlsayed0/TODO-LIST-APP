@@ -14,5 +14,11 @@ data class Task(
     val createDescription:String?,
     val overDueDescription:String?,
     val listOfTags:MutableList<String>?// = mutableListOf("TO DO"),//we should add "TO DO" on every task but it could be removed by user
-
 )
+
+@Entity
+data class Tag (@PrimaryKey val id:Int, val name:String)
+
+
+@Entity(primaryKeys=["tagId" ,"taskId"])
+data class TaskToTag(val tagId :Int ,val taskId:Int)

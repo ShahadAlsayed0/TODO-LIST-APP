@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.Button
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
@@ -56,7 +58,8 @@ class MainFragment : Fragment() {
              })
          }*/
         fillButton.setOnClickListener() {
-            recyclerView.startLayoutAnimation()
+           // recyclerView.startLayoutAnimation()
+            view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
         }
 
     }
