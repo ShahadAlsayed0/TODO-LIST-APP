@@ -68,6 +68,7 @@ class AddTaskFragment : Fragment() {
             if (title.text.isNotEmpty()) {
 
 // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
+    //${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
                   Toast.makeText(view.context," result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",Toast.LENGTH_LONG).show()
                /* val newTask = Task(
                     title.text.toString(),

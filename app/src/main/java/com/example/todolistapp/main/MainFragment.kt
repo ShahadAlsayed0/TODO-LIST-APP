@@ -48,7 +48,7 @@ class MainFragment : Fragment() {
         recyclerView.layoutAnimation = lac
 
 
-        recyclerView.adapter = Adapter(dummyListOfTasks())
+     //   recyclerView.adapter = Adapter(dummyListOfTasks())
 
         // viewModel.fillDB()
 
@@ -59,7 +59,11 @@ class MainFragment : Fragment() {
          }*/
         fillButton.setOnClickListener() {
            // recyclerView.startLayoutAnimation()
+
+           // view.findNavController().navigate(R.id.action_mainFragment_to_testRoomData)
             view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
+
+
         }
 
     }
@@ -69,46 +73,53 @@ class MainFragment : Fragment() {
         fillButton = view.findViewById(R.id.btnAdd)
     }
 }
+/*
 
 fun dummyListOfTasks(): MutableList<Task> {
-
+var countID=-1
     val task1 = Task(
-        "do my homework", "22/12/2021", null, false, "gotta add title to it", null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        ++countID,"do my homework", "22/12/2021", null, false, "gotta add title to it", null,
+        0)
+        //mutableListOf("TO DO", "Home Work"))
     val task2 = Task(
-        "eat breakfast", "21/12/2021", null, false, "gotta add title to it", null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        ++countID,"eat breakfast", "21/12/2021", null, false, "gotta add title to it", null,
+        1)
+        //mutableListOf("TO DO", "Home Work"))
+
     val task3 = Task(
-        "Today I bought a raincoat and wore it on a sunny day",
+        ++countID,"Today I bought a raincoat and wore it on a sunny day",
         "22/12/2021",
         null,
         false,
         "gotta add title to it",
         null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        1)
+        //mutableListOf("TO DO", "Home Work"))
+
     val task4 = Task(
-        "There's no alternative", "22/12/2021", null, false, "gotta add title to it", null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        ++countID,"There's no alternative", "22/12/2021", null, false, "gotta add title to it", null,
+        2)
+        //mutableListOf("TO DO", "Home Work"))
+
     val task5 = Task(
-        "Tom left the next year", "22/12/2021", null, false, "gotta add title to it", null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        ++countID,"Tom left the next year", "22/12/2021", null, false, "gotta add title to it", null,
+        2)
+        //mutableListOf("TO DO", "Home Work"))
+
     val task6 = Task(
-        " What's the problem with your computer?",
+        ++countID," What's the problem with your computer?",
         "22/12/2021",
         null,
         false,
         "gotta add title to it",
         null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        3)
+        //mutableListOf("TO DO", "Home Work"))
+
     val task7 = Task(
-        "do my homework", "22/12/2021", null, false, "gotta add title to it", null,
-        mutableListOf("TO DO", "Home Work")
-    )
+        ++countID,"do my homework", "22/12/2021", null, false, "gotta add title to it", null,
+        4)
+        //mutableListOf("TO DO", "Home Work"))
+
     return mutableListOf(task1, task2, task3, task4, task5, task6, task7)
-}
+}*/

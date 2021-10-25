@@ -20,7 +20,7 @@ class MainViewModel(context: Application) : AndroidViewModel(context){
     }
 
     fun fillDB()  = viewModelScope.launch {
-        repo.fillDB()
+        repo.insertTask()
     }
 
 }

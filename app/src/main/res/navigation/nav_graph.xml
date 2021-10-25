@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/testRoomData2">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -13,6 +13,7 @@
         <action
             android:id="@+id/action_mainFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
@@ -23,4 +24,14 @@
             android:id="@+id/action_addTaskFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/testRoomData2"
+        android:name="com.example.todolistapp.testRoom.TestRoomData"
+        android:label="test_room_data"
+        tools:layout="@layout/test_room_data" >
+        <action
+            android:id="@+id/action_testRoomData2_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+
 </navigation>
