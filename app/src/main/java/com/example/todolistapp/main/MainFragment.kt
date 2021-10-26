@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,8 +48,13 @@ class MainFragment : Fragment() {
         lac.order = LayoutAnimationController.ORDER_NORMAL
         recyclerView.layoutAnimation = lac
 
-       // recyclerView.adapter=Adapter()
+
      //   recyclerView.adapter = Adapter(dummyListOfTasks())
+
+        viewModel.getAllTasks().observe(viewLifecycleOwner, Observer{
+            recyclerView.adapter=Adapter(it)
+        })
+
 
         // viewModel.fillDB()
 

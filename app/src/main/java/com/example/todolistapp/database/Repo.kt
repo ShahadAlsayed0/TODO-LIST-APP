@@ -50,9 +50,10 @@ class Repo(context: Context) {
     }
 
 
-    suspend fun insertTaskToTag(tagId: Int, taskId: Int) {
+    suspend fun insertTaskToTag(tagId: Int, taskId: Int):TaskToTag {
         val taskToTag = TaskToTag(tagId, taskId)
         appDB.taskDao.insertTaskToTag(taskToTag)
+        return taskToTag
     }
 
     suspend fun selectJoinByTagID(id: Int): List<TaskToTag> = withContext(Dispatchers.IO) {

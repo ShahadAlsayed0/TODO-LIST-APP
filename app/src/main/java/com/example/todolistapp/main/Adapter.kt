@@ -29,6 +29,7 @@ class Adapter(private val tasksList: List<Task>) : RecyclerView.Adapter<ItemAdap
             strTags += "$it, "
         }*/
        // holder.tagsTextView.text = task.listOfTags.toString()
+
     }
 
     override fun getItemCount(): Int {

@@ -72,6 +72,9 @@ class TestRoomData : Fragment() {
         // viewModel.insertTaskToTag(-1, 0)
 */
 
+        testAdd.setOnClickListener {
+            view.findNavController().navigate(R.id.action_testRoomData2_to_addTaskFragment)
+        }
 
         viewModel.getAll().observe(viewLifecycleOwner, Observer {
             it.forEach {
@@ -81,10 +84,7 @@ class TestRoomData : Fragment() {
             str = ""
         })
 
-        testAdd.setOnClickListener {
-            view.findNavController().navigate(R.id.action_testRoomData2_to_addTaskFragment)
-        }
-        viewModel.getAllTasks().observe(viewLifecycleOwner, Observer {
+          viewModel.getAllTasks().observe(viewLifecycleOwner, Observer {
             it.forEach {
                 str += "TASK: ${it.id}: ${it.title}\n"
             }
@@ -108,10 +108,9 @@ class TestRoomData : Fragment() {
                 str += "${it.taskId} and ${it.tagId}: "
 
 
-                */
-/*viewModel.selectTagByID(it.tagId).observe(viewLifecycleOwner, Observer{
+viewModel.selectTagByID(it.tagId).observe(viewLifecycleOwner, Observer{
                     str +=  "${it.name} \n"
-                })*//*
+                })
 
             }
             testjointask.text = str
@@ -124,11 +123,10 @@ class TestRoomData : Fragment() {
             testjointag.text = str
             str = ""
         })
-*/
 
 
         //get all tasks under specific tag
-     /*   viewModel.selectNEW(2).observe(viewLifecycleOwner, Observer {
+        viewModel.selectNEW(2).observe(viewLifecycleOwner, Observer {
             it.forEach {
                 str += "${it.title}\n"
 

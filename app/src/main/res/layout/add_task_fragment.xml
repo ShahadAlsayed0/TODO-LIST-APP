@@ -22,7 +22,7 @@
 
         <EditText
             android:id="@+id/addTitle"
-            android:layout_width="100sp"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:hint="title"
             android:textSize="23sp" />
@@ -89,21 +89,9 @@
             android:layout_marginRight="20sp"
             android:textSize="23sp" />
 
-        <CheckBox
-            android:id="@+id/todocheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TO DO"
-            android:checked="true"
-            android:textSize="23sp"/>
-        <CheckBox
-            android:id="@+id/newtagcheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""/>
         <EditText
             android:id="@+id/addTag"
-            android:layout_width="130sp"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:hint="Tag"
             android:textSize="23sp" />

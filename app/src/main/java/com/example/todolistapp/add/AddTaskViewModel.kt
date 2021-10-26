@@ -1,10 +1,7 @@
 package com.example.todolistapp.add
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.todolistapp.database.Repo
 import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
@@ -14,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
     private val repo = Repo(context)
-    private val toDoTag= Tag(-1,"TO DO")
+    private val toDoTag = Tag(-1, "TO DO")
 
     fun getAll(): MutableLiveData<List<TaskToTag>> {
         val tasks = MutableLiveData<List<TaskToTag>>()
@@ -99,16 +96,28 @@ class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
         repo.insertTaskToTag(tag, task)
     }
 
-    fun insertTaskANDTag(task: Task, tag: Tag) {
+    fun insertTaskANDTag(task: Task, tag: Tag): LiveData<TaskToTag> {
+        val taskWithTag = MutableLiveData<TaskToTag>()
+        val taskOb = MutableLiveData<Task>()
+        val tagOb = MutableLiveData<Tag>()
         viewModelScope.launch {
             repo.insertTask(task)
             repo.insertTag(tag)
-            val taskOb = repo.selectTaskByTitle(task.title)
-            val tagOb = repo.selectTagByName(tag.name)
-            repo.insertTaskToTag(tagOb.id, taskOb.id)
-            repo.insertTaskToTag(toDoTag.id, taskOb.id) //default to do tag
+            taskOb.postValue(repo.selectTaskByTitle(task.title))
+            tagOb.postValue(repo.selectTagByName(tag.name))
+            taskOb.value?.let {
+                tagOb.value?.let { it1 ->
+                    taskWithTag.postValue(
+                        repo.insertTaskToTag(
+                            it1.id,
+                            it.id
+                        )
+                    )
+                }
+            }
+            taskOb.value?.let { repo.insertTaskToTag(toDoTag.id, it.id) } //default to do tag
 
         }
-
+        return taskWithTag
     }
 }
