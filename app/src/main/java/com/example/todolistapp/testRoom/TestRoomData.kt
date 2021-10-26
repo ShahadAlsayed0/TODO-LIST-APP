@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.todolistapp.R
-import com.example.todolistapp.database.data.Tag
+//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
 
 class TestRoomData : Fragment() {
@@ -29,7 +29,7 @@ class TestRoomData : Fragment() {
         return inflater.inflate(R.layout.test_room_data, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(TestRoomDataViewModel::class.java)
         testData = view.findViewById(R.id.testData)
@@ -40,6 +40,7 @@ class TestRoomData : Fragment() {
         testAdd = view.findViewById(R.id.testAdd)
 
         var str = ""
+*/
 /*
 
    val tag2= Tag(2,"Home Work")
@@ -70,7 +71,7 @@ class TestRoomData : Fragment() {
         //  viewModel.insertTask()
         //  viewModel.insertTag()
         // viewModel.insertTaskToTag(-1, 0)
-*/
+*//*
 
         testAdd.setOnClickListener {
             view.findNavController().navigate(R.id.action_testRoomData2_to_addTaskFragment)
@@ -99,7 +100,7 @@ class TestRoomData : Fragment() {
             str = ""
         })
 
-/*
+*//*
 
 
 
@@ -133,11 +134,11 @@ viewModel.selectTagByID(it.tagId).observe(viewLifecycleOwner, Observer{
             }
             testDataTask.text = str
         })
-*/
+*//*
 
-    }
+    }*/
 
-    fun dummyListOfTasks(): MutableList<Task> {
+    /*fun dummyListOfTasks(): MutableList<Task> {
         var countID = -1
         val task1 = Task(
             ++countID, "do my homework", "22/12/2021", null, false, "gotta add title to it", null,
@@ -196,5 +197,5 @@ viewModel.selectTagByID(it.tagId).observe(viewLifecycleOwner, Observer{
         //mutableListOf("TO DO", "Home Work"))
 
         return mutableListOf(task1, task2, task3, task4, task5, task6, task7)
-    }
+    }*/
 }

@@ -3,23 +3,31 @@ package com.example.todolistapp.add
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.todolistapp.database.Repo
-import com.example.todolistapp.database.data.Tag
+//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
-import com.example.todolistapp.database.data.TaskToTag
+//import com.example.todolistapp.database.data.TaskToTag
 import com.example.todolistapp.database.data.sameTagTask
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
     private val repo = Repo(context)
-    private val toDoTag = Tag(-1, "TO DO")
+  //  private val toDoTag = Tag(-1, "TO DO")
 
-    fun getAll(): MutableLiveData<List<TaskToTag>> {
-        val tasks = MutableLiveData<List<TaskToTag>>()
+   fun selectTaskByTag(tag:String): MutableLiveData<Task> {
+       val task = MutableLiveData<Task>()
+       viewModelScope.launch {
+           task.postValue(repo.selectTaskByTag(tag))
+       }
+       return task
+  }
+    fun selectTaskByTitle(title:String): MutableLiveData<Task> {
+        val task = MutableLiveData<Task>()
         viewModelScope.launch {
-            tasks.postValue(repo.getAll())
+            task.postValue(repo.selectTaskByTitle(title))
         }
-        return tasks
-
+        return task
     }
 
     fun getAllTasks(): MutableLiveData<List<Task>> {
@@ -28,6 +36,29 @@ class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
             tasks.postValue(repo.getAllTasks())
         }
         return tasks
+    }
+
+    fun selectTaskByID(id: Int): MutableLiveData<Task> {
+        val task = MutableLiveData<Task>()
+        viewModelScope.launch {
+            task.postValue(repo.selectTaskByID(id))
+        }
+        return task
+
+    }
+
+    fun insertTask(task: Task) = viewModelScope.launch {
+        repo.insertTask(task)
+    }
+
+    /*
+    fun getAll(): MutableLiveData<List<TaskToTag>> {
+        val tasks = MutableLiveData<List<TaskToTag>>()
+        viewModelScope.launch {
+            tasks.postValue(repo.getAll())
+        }
+        return tasks
+
     }
 
     fun getAllTags(): MutableLiveData<List<Tag>> {
@@ -73,19 +104,6 @@ class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
         return tag
     }
 
-    fun selectTaskByID(id: Int): MutableLiveData<Task> {
-        val task = MutableLiveData<Task>()
-        viewModelScope.launch {
-            task.postValue(repo.selectTaskByID(id))
-        }
-        return task
-
-    }
-
-    fun insertTask(task: Task) = viewModelScope.launch {
-        repo.insertTask(task)
-    }
-
     fun insertTag(tag: Tag) = viewModelScope.launch {
         repo.insertTag(tag)
     }
@@ -119,5 +137,5 @@ class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
 
         }
         return taskWithTag
-    }
+    }*/
 }

@@ -1,9 +1,9 @@
 package com.example.todolistapp.database
 
 import android.content.Context
-import com.example.todolistapp.database.data.Tag
+//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
-import com.example.todolistapp.database.data.TaskToTag
+//import com.example.todolistapp.database.data.TaskToTag
 import com.example.todolistapp.database.data.sameTagTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,13 +14,6 @@ class Repo(context: Context) {
     suspend fun getAllTasks(): List<Task> = withContext(Dispatchers.IO) {
         appDB.taskDao.getAllTasks()
     }
-
-    suspend fun getAllTags(): List<Tag> = withContext(Dispatchers.IO) {
-        appDB.taskDao.getAllTags()
-    }
-
-    suspend fun getAll(): List<TaskToTag> = appDB.taskDao.getAll()
-
     suspend fun insertTask(task: Task) = withContext(Dispatchers.IO) {
         appDB.taskDao.insertTask(task)
         /*    val task1 = Task(
@@ -40,6 +33,24 @@ class Repo(context: Context) {
              }
          }*/
     }
+    suspend fun selectTaskByID(id:Int): Task  = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectTaskByID(id)
+    }
+    suspend fun selectTaskByTitle(title:String): Task = withContext(Dispatchers.IO){
+        appDB.taskDao.selectTaskByTitle(title)
+    }
+    suspend fun selectTaskByTag(tag:String): Task =  withContext(Dispatchers.IO) {
+        appDB.taskDao.selectTaskByTag(tag)
+    }
+
+
+    /*suspend fun getAllTags(): List<Tag> = withContext(Dispatchers.IO) {
+        appDB.taskDao.getAllTags()
+    }
+
+    suspend fun getAll(): List<TaskToTag> = appDB.taskDao.getAll()
+
+
 
     suspend fun insertTag(tag: Tag) = withContext(Dispatchers.IO) {
         //  val tag1= Tag(-1,"TO DO")
@@ -69,14 +80,10 @@ class Repo(context: Context) {
         appDB.taskDao.selectTagByID(id)
     }
 
-    suspend fun selectTaskByID(id:Int): Task  = withContext(Dispatchers.IO) {
-        appDB.taskDao.selectTaskByID(id)
-    }
+
     suspend fun selectTagByName(name:String): Tag = withContext(Dispatchers.IO){
         appDB.taskDao.selectTagByName(name)
-    }
+    }*/
 
-    suspend fun selectTaskByTitle(title:String): Task = withContext(Dispatchers.IO){
-        appDB.taskDao.selectTaskByTitle(title)
-    }
+
 }

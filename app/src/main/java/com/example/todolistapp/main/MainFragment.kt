@@ -49,10 +49,43 @@ class MainFragment : Fragment() {
         recyclerView.layoutAnimation = lac
 
 
-     //   recyclerView.adapter = Adapter(dummyListOfTasks())
+    /*    val task1 = Task(
+            "do my homework",
+            "22/12/2021",
+            "1/12/2010",
+            false,
+            "gotta add title to it",
+            null,
+            "Home Work"
+        )
+        viewModel.insertTask(task1)
+        val task2 = Task(
+            "eat breakfast", "21/12/2021", "22/12/2021", false, "gotta add title to it", null,
+        )
+        viewModel.insertTask(task2)
 
-        viewModel.getAllTasks().observe(viewLifecycleOwner, Observer{
-            recyclerView.adapter=Adapter(it)
+        val task3 = Task(
+            "Cry a little", "22/12/2021", "5/12/2010", false, "gotta add title to it", null,"Sad Times"
+        )
+        viewModel.insertTask(task3)
+        val task4 = Task(
+            "do something", "22/12/2021", null, false, "gotta add title to it", null,
+        )
+        viewModel.insertTask(task4)
+        val task5 = Task(
+            " Math homework",
+            "23/12/2021",
+            "2/12/2010",
+            false,
+            "have to do it",
+            null,
+            "Home Work"
+        )
+        viewModel.insertTask(task5)
+*/
+
+        viewModel.getAllTasks().observeForever(Observer {
+            recyclerView.adapter = Adapter(it)
         })
 
 
@@ -64,9 +97,9 @@ class MainFragment : Fragment() {
              })
          }*/
         fillButton.setOnClickListener() {
-           // recyclerView.startLayoutAnimation()
+            // recyclerView.startLayoutAnimation()
 
-           // view.findNavController().navigate(R.id.action_mainFragment_to_testRoomData)
+            // view.findNavController().navigate(R.id.action_mainFragment_to_testRoomData)
             view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
 
 

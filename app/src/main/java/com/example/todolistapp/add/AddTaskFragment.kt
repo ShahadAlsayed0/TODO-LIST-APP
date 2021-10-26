@@ -12,7 +12,7 @@ import android.widget.*
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.todolistapp.R
-import com.example.todolistapp.database.data.Tag
+//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -67,40 +67,43 @@ class AddTaskFragment : Fragment() {
 
         cancel.setOnClickListener {
             view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
-           // view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
+            // view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
 
         }
 
         addTask.setOnClickListener {
             if (title.text.isNotEmpty()) {
-         /*       // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
-                // ${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
-                 Toast.makeText(
-                     view.context,
-                     " result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",
-                     Toast.LENGTH_LONG
-                 ).show()
-                //   viewModel.insertTask(addTask())
+                /*       // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
+                       // ${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
+                        Toast.makeText(
+                            view.context,
+                            " result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",
+                            Toast.LENGTH_LONG
+                        ).show()
+                       //   viewModel.insertTask(addTask())
+                       viewModel.insertTask(addTask())
+
+                       addTag()?.let { tag ->
+                           viewModel.insertTag(tag)
+                       }
+
+                       if (newTagCheck.isChecked) {
+                          // viewModel.insertTaskToTag(TAGID, TASKID)
+                       }
+                      if(toDoCheck.isChecked) {
+                         // viewModel.insertTaskToTag(TODOTAG.id, TASKID)
+                      }
+               */
+
+                /* addTag()?.let { tag ->
+                         viewModel.insertTaskANDTag(addTask(),tag)
+                     }*/
+
+
                 viewModel.insertTask(addTask())
 
-                addTag()?.let { tag ->
-                    viewModel.insertTag(tag)
-                }
-
-                if (newTagCheck.isChecked) {
-                   // viewModel.insertTaskToTag(TAGID, TASKID)
-                }
-               if(toDoCheck.isChecked) {
-                  // viewModel.insertTaskToTag(TODOTAG.id, TASKID)
-               }
-        */
-
-            addTag()?.let { tag ->
-                    viewModel.insertTaskANDTag(addTask(),tag)
-                }
-
                 view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
-             //  view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
+                //  view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
 
             } else {
                 Toast.makeText(view.context, "Must Enter a Title", Toast.LENGTH_SHORT).show()
@@ -109,16 +112,25 @@ class AddTaskFragment : Fragment() {
 
     }
 
-    fun addTag(): Tag? {
-         if (tag.text.isNotEmpty()) {
-             return Tag(tag.text.toString())
-
-        } else return null
+    private fun addTag(): String? {
+        return if (tag.text.isNotEmpty()) {
+            tag.text.toString()
+        } else null
     }
 
     private fun addTask(): Task {
-        return Task(
-           title.text.toString(),
+      return  addTag()?.let {
+            Task(
+                title.text.toString(),
+                getCurrentDate(),
+                ifEmptyThenNull(selectedDate.text.toString()),
+                false,
+                ifEmptyThenNull(description.text.toString()),
+                null,
+                it
+            )
+        } ?: Task(
+            title.text.toString(),
             getCurrentDate(),
             ifEmptyThenNull(selectedDate.text.toString()),
             false,
@@ -129,10 +141,10 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun ifEmptyThenNull(text: String): String? {
-        return if(text.isEmpty()) null else text
+        return if (text.isEmpty()) null else text
     }
 
-    fun getCurrentDate(): String {
+    private fun getCurrentDate(): String {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         //Toast.makeText(view.context," Date : $formatted ",Toast.LENGTH_SHORT).show()

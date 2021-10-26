@@ -6,12 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.todolistapp.database.data.Task
-import com.example.todolistapp.database.data.TaskToTag
-import com.example.todolistapp.database.data.Tag
+//import com.example.todolistapp.database.data.TaskToTag
+//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.typeconverters.Converters
 
 
-@Database(entities = [Tag::class , Task::class , TaskToTag::class], version = 1, exportSchema = false)
+@Database(entities = [ Task::class ], version = 1, exportSchema = false)// [Tag::class , Task::class , TaskToTag::class]
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract val taskDao: TaskDao

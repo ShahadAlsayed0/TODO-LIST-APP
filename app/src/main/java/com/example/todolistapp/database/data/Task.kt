@@ -9,12 +9,12 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
-    val createDate: String,//auto generated, for it to be primary key we need it to have time in milli seconds*to be unique*
+    val createDate: String,
     val dueDate: String?,
     val completed: Boolean,
     val createDescription: String?,
     val overDueDescription: String?,
-    // val tagId:Int =0//we don't need this?//val listOfTags:MutableList<String>?// = mutableListOf("TO DO"),//we should add "TO DO" on every task but it could be removed by user
+    val Tag:String//new
 ) {
     constructor(
         title: String,
@@ -22,16 +22,35 @@ data class Task(
         dueDate: String?,
         completed: Boolean,
         createDescription: String?,
-        overDueDescription: String?
+        overDueDescription: String?,
     ) : this(
         0, title,
         createDate,
         dueDate,
         completed,
         createDescription,
-        overDueDescription
+        overDueDescription,
+        "TO DO"//new
+    )
+    constructor(
+        title: String,
+        createDate: String,
+        dueDate: String?,
+        completed: Boolean,
+        createDescription: String?,
+        overDueDescription: String?,
+        Tag: String
+    ) : this(
+        0, title,
+        createDate,
+        dueDate,
+        completed,
+        createDescription,
+        overDueDescription,
+        Tag//new
     )
 }
+/*
 
 @Entity
 data class Tag(
@@ -44,4 +63,4 @@ data class Tag(
 
 
 @Entity(primaryKeys = ["tagId", "taskId"])
-data class TaskToTag(val tagId: Int, val taskId: Int)
+data class TaskToTag(val tagId: Int, val taskId: Int)*/

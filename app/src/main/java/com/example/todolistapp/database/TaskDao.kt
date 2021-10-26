@@ -24,6 +24,9 @@ interface TaskDao {
 
  @Query("select * from task_table where title== :title")
     suspend fun selectTaskByTitle(title:String): Task
+    @Query("select * from task_table where Tag== :tag")
+    suspend fun selectTaskByTag(tag:String): Task
+/*
 
     @Query("select * From TaskToTag ")
     suspend fun getAll(): List<TaskToTag>
@@ -53,15 +56,6 @@ interface TaskDao {
 
     @Query("select * from task_table inner join Tag on Tag.id==:id ")
     suspend fun selectNEW(id:Int): List<sameTagTask>
-
-//SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-//FROM Orders
-//INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
-
-/*
-
-    @Query("select listOfTags from task_table where createDate ==:createDate")//list of tags for one task
-    suspend fun selectTaskByTag(createDate: Int): Task
 */
 
     //should add query

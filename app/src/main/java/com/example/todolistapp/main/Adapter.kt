@@ -28,7 +28,8 @@ class Adapter(private val tasksList: List<Task>) : RecyclerView.Adapter<ItemAdap
         task.listOfTags.forEach {
             strTags += "$it, "
         }*/
-       // holder.tagsTextView.text = task.listOfTags.toString()
+
+        holder.tagsTextView.text = task.Tag
 
     }
 
