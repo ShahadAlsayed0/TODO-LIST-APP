@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
 import com.example.todolistapp.database.data.TaskToTag
+import com.example.todolistapp.database.data.sameTagTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -44,9 +45,37 @@ class Repo(context: Context) {
         //  val tag1= Tag(-1,"TO DO")
         appDB.taskDao.insertTag(tag)
     }
+    suspend fun selectNEW(id:Int): List<sameTagTask> = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectNEW(id)
+    }
 
-    suspend fun insertTaskToTag( tagId :Int,taskId:Int){
-        val taskToTag= TaskToTag(tagId, taskId)
+
+    suspend fun insertTaskToTag(tagId: Int, taskId: Int) {
+        val taskToTag = TaskToTag(tagId, taskId)
         appDB.taskDao.insertTaskToTag(taskToTag)
+    }
+
+    suspend fun selectJoinByTagID(id: Int): List<TaskToTag> = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectJoinByTagID(id)
+    }
+
+
+    suspend fun selectJoinByTaskID(id: Int): List<TaskToTag> = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectJoinByTaskID(id)
+    }
+
+    suspend fun selectTagByID(id:Int): Tag  = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectTagByID(id)
+    }
+
+    suspend fun selectTaskByID(id:Int): Task  = withContext(Dispatchers.IO) {
+        appDB.taskDao.selectTaskByID(id)
+    }
+    suspend fun selectTagByName(name:String): Tag = withContext(Dispatchers.IO){
+        appDB.taskDao.selectTagByName(name)
+    }
+
+    suspend fun selectTaskByTitle(title:String): Task = withContext(Dispatchers.IO){
+        appDB.taskDao.selectTaskByTitle(title)
     }
 }

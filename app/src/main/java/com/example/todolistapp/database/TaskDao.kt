@@ -1,10 +1,7 @@
 package com.example.todolistapp.database
 
 import androidx.room.*
-import com.example.todolistapp.database.data.Tag
-import com.example.todolistapp.database.data.Task
-import com.example.todolistapp.database.data.TaskTag_Pair
-import com.example.todolistapp.database.data.TaskToTag
+import com.example.todolistapp.database.data.*
 import java.time.LocalDateTime
 
 
@@ -25,6 +22,9 @@ interface TaskDao {
     @Query("select * from task_table where id== :id")
     suspend fun selectTaskByID(id:Int): Task
 
+ @Query("select * from task_table where title== :title")
+    suspend fun selectTaskByTitle(title:String): Task
+
     @Query("select * From TaskToTag ")
     suspend fun getAll(): List<TaskToTag>
 
@@ -38,16 +38,25 @@ interface TaskDao {
     @Query("select * from Tag where id== :id")
     suspend fun selectTagByID(id:Int): Tag
 
+@Query("select * from Tag where name== :name")
+    suspend fun selectTagByName(name:String): Tag
+
     //join
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTaskToTag(taskToTag: TaskToTag)
 
     @Query("select * from TaskToTag where tagId== :id")
-    suspend fun selectTaskTagByID(id:Int): List<TaskToTag>
+    suspend fun selectJoinByTagID(id:Int): List<TaskToTag>
 
     @Query("select * from TaskToTag where taskId== :id")
-    suspend fun selectTagTaskByID(id:Int): List<TaskToTag>
+    suspend fun selectJoinByTaskID(id:Int): List<TaskToTag>
 
+    @Query("select * from task_table inner join Tag on Tag.id==:id ")
+    suspend fun selectNEW(id:Int): List<sameTagTask>
+
+//SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+//FROM Orders
+//INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
 
 /*
 

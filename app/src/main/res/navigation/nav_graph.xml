@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_addTaskFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_addTaskFragment_to_testRoomData2"
+            app:destination="@id/testRoomData2" />
     </fragment>
     <fragment
         android:id="@+id/testRoomData2"

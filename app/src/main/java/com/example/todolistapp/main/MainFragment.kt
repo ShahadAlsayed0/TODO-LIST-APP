@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
         lac.order = LayoutAnimationController.ORDER_NORMAL
         recyclerView.layoutAnimation = lac
 
-
+       // recyclerView.adapter=Adapter()
      //   recyclerView.adapter = Adapter(dummyListOfTasks())
 
         // viewModel.fillDB()

@@ -7,19 +7,41 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "task_table")
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    val title:String,
-    val createDate:String,//auto generated, for it to be primary key we need it to have time in milli seconds*to be unique*
-    val dueDate:String?,
-    val completed:Boolean,
-    val createDescription:String?,
-    val overDueDescription:String?,
-   // val tagId:Int =0//we don't need this?//val listOfTags:MutableList<String>?// = mutableListOf("TO DO"),//we should add "TO DO" on every task but it could be removed by user
-)
+    val id: Int,
+    val title: String,
+    val createDate: String,//auto generated, for it to be primary key we need it to have time in milli seconds*to be unique*
+    val dueDate: String?,
+    val completed: Boolean,
+    val createDescription: String?,
+    val overDueDescription: String?,
+    // val tagId:Int =0//we don't need this?//val listOfTags:MutableList<String>?// = mutableListOf("TO DO"),//we should add "TO DO" on every task but it could be removed by user
+) {
+    constructor(
+        title: String,
+        createDate: String,
+        dueDate: String?,
+        completed: Boolean,
+        createDescription: String?,
+        overDueDescription: String?
+    ) : this(
+        0, title,
+        createDate,
+        dueDate,
+        completed,
+        createDescription,
+        overDueDescription
+    )
+}
 
 @Entity
-data class Tag (@PrimaryKey(autoGenerate = true) val id: Int, val name:String)//each tag has id // id=0=TODOList
+data class Tag(
+    @PrimaryKey(autoGenerate = true)
+     val id: Int,
+     val name: String
+) {
+    constructor( name: String):this(0,name)
+}
 
 
-@Entity(primaryKeys=["tagId" ,"taskId"])
-data class TaskToTag(val tagId :Int ,val taskId:Int)
+@Entity(primaryKeys = ["tagId", "taskId"])
+data class TaskToTag(val tagId: Int, val taskId: Int)
