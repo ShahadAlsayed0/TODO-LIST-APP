@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "task_table")
 data class Task(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id:Int,
     val title:String,
     val createDate:String,//auto generated, for it to be primary key we need it to have time in milli seconds*to be unique*
@@ -18,7 +18,7 @@ data class Task(
 )
 
 @Entity
-data class Tag (@PrimaryKey val id: Int, val name:String)//each tag has id // id=0=TODOList
+data class Tag (@PrimaryKey(autoGenerate = true) val id: Int, val name:String)//each tag has id // id=0=TODOList
 
 
 @Entity(primaryKeys=["tagId" ,"taskId"])

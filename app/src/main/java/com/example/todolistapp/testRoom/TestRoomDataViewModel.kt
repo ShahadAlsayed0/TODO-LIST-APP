@@ -10,10 +10,10 @@ import com.example.todolistapp.database.data.Task
 import com.example.todolistapp.database.data.TaskToTag
 import kotlinx.coroutines.launch
 
-class TestRoomDataViewModel(context: Application) : AndroidViewModel(context){
+class TestRoomDataViewModel(context: Application) : AndroidViewModel(context) {
     private val repo = Repo(context)
 
-    fun getAll() : MutableLiveData<List<TaskToTag>> {
+    fun getAll(): MutableLiveData<List<TaskToTag>> {
         val tasks = MutableLiveData<List<TaskToTag>>()
         viewModelScope.launch {
             tasks.postValue(repo.getAll())
@@ -21,6 +21,7 @@ class TestRoomDataViewModel(context: Application) : AndroidViewModel(context){
         return tasks
 
     }
+
     fun getAllTasks(): MutableLiveData<List<Task>> {
         val tasks = MutableLiveData<List<Task>>()
         viewModelScope.launch {
@@ -28,7 +29,8 @@ class TestRoomDataViewModel(context: Application) : AndroidViewModel(context){
         }
         return tasks
     }
- fun getAllTags(): MutableLiveData<List<Tag>> {
+
+    fun getAllTags(): MutableLiveData<List<Tag>> {
         val tags = MutableLiveData<List<Tag>>()
         viewModelScope.launch {
             tags.postValue(repo.getAllTags())
@@ -36,13 +38,16 @@ class TestRoomDataViewModel(context: Application) : AndroidViewModel(context){
         return tags
     }
 
-    fun insertTask()  = viewModelScope.launch {
-        repo.insertTask()
+    fun insertTask(task: Task) = viewModelScope.launch {
+        repo.insertTask(task)
     }
 
-    fun insertTag()  = viewModelScope.launch {
-        repo.insertTag()
+    fun insertTag(tag: Tag) = viewModelScope.launch {
+        repo.insertTag(tag)
     }
 
+    fun insertTaskToTag(tag: Int, task: Int) = viewModelScope.launch {
+        repo.insertTaskToTag(tag, task)
+    }
 
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.findNavController
 import com.example.todolistapp.R
+import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.data.Task
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -27,6 +28,8 @@ class AddTaskFragment : Fragment() {
     private lateinit var cancel: Button
 
     private lateinit var viewModel: AddTaskViewModel
+    private var TaskID: Int = 0
+    private var TagID: Int = 0
 
     companion object {
         fun newInstance() = AddTaskFragment()
@@ -67,16 +70,17 @@ class AddTaskFragment : Fragment() {
         addTask.setOnClickListener {
             if (title.text.isNotEmpty()) {
 
-// ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
-    //${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
-                  Toast.makeText(view.context," result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",Toast.LENGTH_LONG).show()
-               /* val newTask = Task(
-                    title.text.toString(),
-                    getCurrentDate(),
-                    ifEmptyThenNull(selectedDate.text.toString()),
-                    false,
-                    ifEmptyThenNull(description.text.toString()),null,ifEmptyThenNull(tag.text.toString())
-                )*/
+                // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
+                // ${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
+               /* Toast.makeText(
+                    view.context,
+                    " result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",
+                    Toast.LENGTH_LONG
+                ).show()*/
+
+                //  viewModel.insertTask()
+                //  viewModel.insertTag()
+               // viewModel.insertTaskToTag(-1, 0)
 
 
             } else {
@@ -86,7 +90,25 @@ class AddTaskFragment : Fragment() {
 
     }
 
-    fun ifEmptyThenNull(text: String): String? {
+    fun addTag():Tag? {
+       return if (tag.text.isNotEmpty()) {
+             Tag(TagID, tag.text.toString())
+        }else null
+    }
+
+    private fun addTask():Task {
+        return Task(
+            TaskID,
+            title.text.toString(),
+            getCurrentDate(),
+            ifEmptyThenNull(selectedDate.text.toString()),
+            false,
+            ifEmptyThenNull(description.text.toString()),
+            null,
+        )
+    }
+
+    private fun ifEmptyThenNull(text: String): String? {
         return if (text.isEmpty()) {
             null
         } else {

@@ -21,10 +21,9 @@ interface TaskDao {
 
     @Delete
     suspend fun delete(task: Task)
-
-    //not needed?
-    @Query("select * from task_table where createDate== :createDate")
-    suspend fun selectTaskByCreDate(createDate: LocalDateTime): Task
+    //get one task by id
+    @Query("select * from task_table where id== :id")
+    suspend fun selectTaskByID(id:Int): Task
 
     @Query("select * From TaskToTag ")
     suspend fun getAll(): List<TaskToTag>
@@ -35,6 +34,19 @@ interface TaskDao {
 
     @Query("select * From Tag ")
     suspend fun getAllTags(): List<Tag>
+    //get one tag by id
+    @Query("select * from Tag where id== :id")
+    suspend fun selectTagByID(id:Int): Tag
+
+    //join
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTaskToTag(taskToTag: TaskToTag)
+
+    @Query("select * from TaskToTag where tagId== :id")
+    suspend fun selectTaskTagByID(id:Int): List<TaskToTag>
+
+    @Query("select * from TaskToTag where taskId== :id")
+    suspend fun selectTagTaskByID(id:Int): List<TaskToTag>
 
 
 /*
