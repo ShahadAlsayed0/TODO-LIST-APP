@@ -4,12 +4,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.todolistapp.database.Repo
 //import com.example.todolistapp.database.data.Tag
-import com.example.todolistapp.database.data.Task
+import com.example.todolistapp.database.model.Task
 //import com.example.todolistapp.database.data.TaskToTag
-import com.example.todolistapp.database.data.sameTagTask
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class AddTaskViewModel(context: Application) : AndroidViewModel(context) {
     private val repo = Repo(context)

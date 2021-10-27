@@ -1,10 +1,11 @@
-package com.example.todolistapp.database.data
+package com.example.todolistapp.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "task_table")
+//@Entity(indices = {@Index(value = {"title"},unique = true)})
 data class Task(
     @PrimaryKey(autoGenerate = true)
     val id: Int,

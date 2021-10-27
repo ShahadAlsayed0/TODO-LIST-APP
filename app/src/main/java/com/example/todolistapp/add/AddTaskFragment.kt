@@ -3,22 +3,18 @@ package com.example.todolistapp.add
 import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.example.todolistapp.R
 //import com.example.todolistapp.database.data.Tag
-import com.example.todolistapp.database.data.Task
+import com.example.todolistapp.database.model.Task
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.random.Random
 
 class AddTaskFragment : Fragment() {
     private lateinit var title: EditText

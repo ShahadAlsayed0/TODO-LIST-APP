@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todolistapp.database.Repo
 //import com.example.todolistapp.database.data.Tag
-import com.example.todolistapp.database.data.Task
+import com.example.todolistapp.database.model.Task
 //import com.example.todolistapp.database.data.TaskToTag
-import com.example.todolistapp.database.data.sameTagTask
 import kotlinx.coroutines.launch
 
 class TestRoomDataViewModel(context: Application) : AndroidViewModel(context) {

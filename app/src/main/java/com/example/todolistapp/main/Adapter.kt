@@ -4,15 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
-import com.example.todolistapp.database.data.Task
+import com.example.todolistapp.database.model.Task
 
-class Adapter(private val tasksList: List<Task>,private val viewModel: MainViewModel) : RecyclerView.Adapter<Adapter.ItemAdapter>() {
+class Adapter(private val tasksList: List<Task>, private val viewModel: MainViewModel) :
+    RecyclerView.Adapter<Adapter.ItemAdapter>() {
     var onItemClick: ((Task) -> Unit)? = null
 
 
@@ -39,8 +36,6 @@ class Adapter(private val tasksList: List<Task>,private val viewModel: MainViewM
             }*/
 
         holder.itemView.setOnClickListener {
-
-
             viewModel.taskLive.postValue(task)
         }
 
@@ -52,7 +47,7 @@ class Adapter(private val tasksList: List<Task>,private val viewModel: MainViewM
 
 
     inner class ItemAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //, View.OnClickListener {
+
         val titleTextView: TextView = itemView.findViewById(R.id.item_title)
         val dDateTextView: TextView = itemView.findViewById(R.id.item_due_date)
         val tagsTextView: TextView = itemView.findViewById(R.id.item_tags)
@@ -63,14 +58,5 @@ class Adapter(private val tasksList: List<Task>,private val viewModel: MainViewM
           val oDDescriptionTextView: TextView = itemView.findViewById(R.id.item_Description_over_due)
  */
 
-      /*  init {
-              itemView.setOnClickListener(this)
-
-        }*/
-
-        /*  override fun onClick(v: View?) {
-              Toast.makeText(itemView.context, "${titleTextView.text} clicked", Toast.LENGTH_SHORT)
-                  .show()
-          }*/
     }
 }

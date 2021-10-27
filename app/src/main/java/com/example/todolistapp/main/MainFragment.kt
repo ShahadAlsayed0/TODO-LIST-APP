@@ -2,7 +2,6 @@ package com.example.todolistapp.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,13 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
-import com.example.todolistapp.database.data.Task
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -32,6 +29,8 @@ class MainFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
+    private lateinit var btmSheetDelete: Button
+    private lateinit var btmSheetUpdate: Button
 
     companion object {
         fun newInstance() = MainFragment()
@@ -53,7 +52,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         findView(view)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-
+        refreshView()
         //animation at the start of loading the view
         val lac =
             LayoutAnimationController(AnimationUtils.loadAnimation(view.context, R.anim.item_anim))
@@ -62,22 +61,32 @@ class MainFragment : Fragment() {
         recyclerView.layoutAnimation = lac
 
 
+        //get selected item from recycler view
+        viewModel.taskLive.observeForever(Observer { task ->
+
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            tvTitle.setText(task.title)
+            tvSubTitle.text = "${task.createDescription} ${task.createDate}"
+
+            btmSheetDelete.setOnClickListener {
+                viewModel.delete(task)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                refreshView()
+
+            }
+            btmSheetUpdate.setOnClickListener {
+
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                refreshView()
+            }
 
 
-      viewModel.taskLive.observeForever(Observer {task->
-
-          bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-          tvTitle.setText(task.title)
-          tvSubTitle.text= "${task.createDescription} ${task.createDate}"
-
-      })
-
-
-        viewModel.getAllTasks().observeForever(Observer {
-            recyclerView.adapter = Adapter(it,viewModel)
         })
 
-                // recyclerView.startLayoutAnimation()
+
+
+
+        // recyclerView.startLayoutAnimation()
 
 
         // viewModel.fillDB()
@@ -96,8 +105,15 @@ class MainFragment : Fragment() {
         }
 
 
+
     }
 
+fun refreshView(){
+    viewModel.getAllTasks().observeForever(Observer {
+        recyclerView.adapter = Adapter(it, viewModel)
+
+    })
+}
     private fun findView(view: View) {
         recyclerView = view.findViewById(R.id.rvRecycleView)
         addButton = view.findViewById(R.id.btnAdd)
@@ -106,8 +122,10 @@ class MainFragment : Fragment() {
         bottomSheet = view.findViewById(R.id.main_bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        tvTitle=view.findViewById(R.id.tvTitle)
-        tvSubTitle=view.findViewById(R.id.tvSubtitle)
+        tvTitle = view.findViewById(R.id.tvTitle)
+        tvSubTitle = view.findViewById(R.id.tvSubtitle)
+        btmSheetDelete = view.findViewById(R.id.btmSheetDelete)
+        btmSheetUpdate = view.findViewById(R.id.btmSheetUpdate)
     }
 }
 

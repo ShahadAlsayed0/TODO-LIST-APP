@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.todolistapp.database.data.Task
+import com.example.todolistapp.database.model.Task
 import com.example.todolistapp.database.Repo
 //import com.example.todolistapp.database.data.Tag
 //import com.example.todolistapp.database.data.TaskToTag
@@ -49,32 +49,10 @@ class MainViewModel(context: Application) : AndroidViewModel(context){
 
     }
 
-/*
-
-    fun getAll(): MutableLiveData<List<TaskToTag>> {
-        val tasks = MutableLiveData<List<TaskToTag>>()
-        viewModelScope.launch {
-            tasks.postValue(repo.getAll())
-        }
-        return tasks
-
+     fun deleteByID(id:Int)= viewModelScope.launch {
+        repo.deleteByID(id)
     }
-
-    fun getAllTags(): MutableLiveData<List<Tag>> {
-        val tags = MutableLiveData<List<Tag>>()
-        viewModelScope.launch {
-            tags.postValue(repo.getAllTags())
-        }
-        return tags
+    fun delete(task: Task)= viewModelScope.launch {
+        repo.delete(task)
     }
-
-    fun insertTag(tag: Tag) = viewModelScope.launch {
-        repo.insertTag(tag)
-    }
-
-    fun insertTaskToTag(tag: Int, task: Int) = viewModelScope.launch {
-        repo.insertTaskToTag(tag, task)
-    }
-*/
-
 }
