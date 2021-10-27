@@ -26,6 +26,10 @@ interface TaskDao {
     suspend fun selectTaskByTitle(title:String): Task
     @Query("select * from task_table where Tag== :tag")
     suspend fun selectTaskByTag(tag:String): Task
+
+    @Query("select * From task_table ")
+    suspend fun getAllTasksAlpha(): List<Task>
+
 /*
 
     @Query("select * From TaskToTag ")

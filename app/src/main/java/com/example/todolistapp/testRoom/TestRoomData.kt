@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.example.todolistapp.R
 //import com.example.todolistapp.database.data.Tag
-import com.example.todolistapp.database.data.Task
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class TestRoomData : Fragment() {
     private lateinit var viewModel: TestRoomDataViewModel
@@ -22,6 +21,8 @@ class TestRoomData : Fragment() {
     private lateinit var testjointask: TextView
     private lateinit var testjointag: TextView
     private lateinit var testAdd: Button
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +30,7 @@ class TestRoomData : Fragment() {
         return inflater.inflate(R.layout.test_room_data, container, false)
     }
 
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(TestRoomDataViewModel::class.java)
         testData = view.findViewById(R.id.testData)
@@ -39,9 +40,25 @@ class TestRoomData : Fragment() {
         testjointag = view.findViewById(R.id.testjointag)
         testAdd = view.findViewById(R.id.testAdd)
 
-        var str = ""
-*/
+
+
+
+       /* var show_dialog: Button = view.findViewById(R.id.show_dialog)
+
+        show_dialog.setOnClickListener {
+            val dialog = BottomSheetDialog(view.context)
+            val secView = layoutInflater.inflate(R.layout.bottom_sheet, null)
+
+            val close = secView.findViewById<ImageView>(R.id.iv_close)
+            close.setOnClickListener { dialog.dismiss() }
+            dialog.setCancelable(false)
+            dialog.setContentView(secView)
+            dialog.show()
+        }*/
+
+
 /*
+        var str = ""
 
    val tag2= Tag(2,"Home Work")
          viewModel.insertTag(tag2)
@@ -71,7 +88,7 @@ class TestRoomData : Fragment() {
         //  viewModel.insertTask()
         //  viewModel.insertTag()
         // viewModel.insertTaskToTag(-1, 0)
-*//*
+
 
         testAdd.setOnClickListener {
             view.findNavController().navigate(R.id.action_testRoomData2_to_addTaskFragment)
@@ -100,7 +117,7 @@ class TestRoomData : Fragment() {
             str = ""
         })
 
-*//*
+
 
 
 
@@ -134,9 +151,9 @@ viewModel.selectTagByID(it.tagId).observe(viewLifecycleOwner, Observer{
             }
             testDataTask.text = str
         })
-*//*
 
-    }*/
+*/
+    }
 
     /*fun dummyListOfTasks(): MutableList<Task> {
         var countID = -1

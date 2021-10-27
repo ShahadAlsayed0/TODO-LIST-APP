@@ -12,6 +12,10 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(context: Application) : AndroidViewModel(context){
     private val repo = Repo(context)
+
+    var taskLive= MutableLiveData<Task>()
+
+
     fun selectTaskByTag(tag:String): MutableLiveData<Task> {
         val task = MutableLiveData<Task>()
         viewModelScope.launch {
