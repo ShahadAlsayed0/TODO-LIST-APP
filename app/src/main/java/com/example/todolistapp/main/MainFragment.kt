@@ -30,7 +30,6 @@ class MainFragment : Fragment() {
     //bottom sheet
     private lateinit var bottomSheet: ConstraintLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private lateinit var btnPersistentBottomSheet: Button
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
 
@@ -62,30 +61,23 @@ class MainFragment : Fragment() {
         lac.order = LayoutAnimationController.ORDER_NORMAL
         recyclerView.layoutAnimation = lac
 
-        //bottom sheet
-        btnPersistentBottomSheet.setOnClickListener {
-           // Toast.makeText(view.context, "bottom sheet visible", Toast.LENGTH_LONG).show()
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-
-        }
 
 
-      viewModel.taskLive.observeForever(Observer {
-          Toast.makeText(view.context,it.title,Toast.LENGTH_LONG).show()
+
+      viewModel.taskLive.observeForever(Observer {task->
+
+          bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+          tvTitle.setText(task.title)
+          tvSubTitle.text= "${task.createDescription} ${task.createDate}"
+
       })
 
 
         viewModel.getAllTasks().observeForever(Observer {
             recyclerView.adapter = Adapter(it,viewModel)
         })
-           /* Adapter(it).onItemClick = {item ->
-                Toast.makeText(view.context,item.title,Toast.LENGTH_LONG).show()
 
-                //do something
-            }*/
                 // recyclerView.startLayoutAnimation()
-
-
 
 
         // viewModel.fillDB()
@@ -112,11 +104,10 @@ class MainFragment : Fragment() {
 
         //bottom sheet
         bottomSheet = view.findViewById(R.id.main_bottom_sheet)
-        btnPersistentBottomSheet = view.findViewById(R.id.btnPersistentBottomSheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         tvTitle=view.findViewById(R.id.tvTitle)
-      //  tvTitle=view.findViewById(R.id.tvSubitle)
+        tvSubTitle=view.findViewById(R.id.tvSubtitle)
     }
 }
 
