@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
 import com.example.todolistapp.SharedViewModel
+import com.example.todolistapp.getCurrentDate
 import com.example.todolistapp.update.DialogWithData
 import com.example.todolistapp.update.DialogWithDataArgs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -60,13 +61,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-     /*   var fresh = false
-        fresh = args.dialogEnded
+        /*   var fresh = false
+           fresh = args.dialogEnded
 
-        if (fresh) {
-            refreshView(view.context)
+           if (fresh) {
+               refreshView(view.context)
 
-        }*/
+           }*/
 
         viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         findView(view)
@@ -93,7 +94,13 @@ class MainFragment : Fragment() {
                 refreshView(view.context)
 
             }
-
+            //haven't tested this, working but not very good
+            if (!task.dueDate.isNullOrEmpty()) {
+                if (task.dueDate < getCurrentDate()) {
+                    btmSheetUpdate.isEnabled = !btmSheetUpdate.isEnabled
+                }
+            }
+            ///////
             btmSheetUpdate.setOnClickListener {
                 val action: NavDirections =
                     MainFragmentDirections.actionMainFragmentToDialogWithData(task)
