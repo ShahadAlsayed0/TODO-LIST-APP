@@ -44,6 +44,7 @@ class Adapter(
             }
         }
 
+
         holder.checkbox.setOnClickListener {
             if (holder.checkbox.isChecked) {
                 viewModel.updateState(true, task.id)
