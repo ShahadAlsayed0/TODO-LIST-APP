@@ -65,8 +65,10 @@ class DialogWithData : DialogFragment() {
 
             viewModel.update(updateTask(newTitle,newDescription,newDueDate,originalTask.id,originalTask.Tag))
 
-           // val action: NavDirections = DialogWithDataDirections.actionDialogWithDataToMainFragment()
-           // view.findNavController().navigate(action)
+
+
+          /*  val action: NavDirections = DialogWithDataDirections.actionDialogWithDataToMainFragment(true)
+            view.findNavController().navigate(action)*/
 
             dismiss()
         }

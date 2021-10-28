@@ -58,7 +58,7 @@
         android:id="@+id/newDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint=" /  / "
+        android:hint="dd-mm-yyyy"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/font_size_16"/>
 

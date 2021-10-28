@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_dialogWithData"
             app:destination="@id/dialogWithData" />
+        <argument
+            android:name="dialog_ended"
+            app:argType="boolean" />
 
     </fragment>
     <fragment

@@ -12,5 +12,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="light_purple">#8189b3</color>
     <color name="red">#A51010</color>
-
+    <color name="gray">#CFCECE</color>
+    <color name="slight_red">#F8D5D5</color>
 </resources>

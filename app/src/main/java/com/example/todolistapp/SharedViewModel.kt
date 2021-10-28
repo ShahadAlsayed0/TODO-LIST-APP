@@ -61,4 +61,7 @@ class SharedViewModel(context: Application) : AndroidViewModel(context) {
     fun update(task: Task) = viewModelScope.launch {
         repo.update(task)
     }
+    fun updateState(state:Boolean,id:Int) = viewModelScope.launch {
+        repo.updateState(state,id)
+    }
 }

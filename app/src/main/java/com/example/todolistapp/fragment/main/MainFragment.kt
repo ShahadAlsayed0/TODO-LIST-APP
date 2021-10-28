@@ -1,7 +1,11 @@
 package com.example.todolistapp.fragment.main
 
+import android.animation.ArgbEvaluator
+import android.content.Context
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +15,7 @@ import android.view.animation.LayoutAnimationController
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -35,7 +40,7 @@ class MainFragment : Fragment() {
     private lateinit var tvSubTitle: TextView
     private lateinit var btmSheetDelete: Button
     private lateinit var btmSheetUpdate: Button
-
+    //val args: MainFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = MainFragment()
@@ -54,10 +59,19 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+     /*   var fresh = false
+        fresh = args.dialogEnded
+
+        if (fresh) {
+            refreshView(view.context)
+
+        }*/
+
         viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         findView(view)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        refreshView()
+        refreshView(view.context)
         //animation at the start of loading the view
         val lac =
             LayoutAnimationController(AnimationUtils.loadAnimation(view.context, R.anim.item_anim))
@@ -76,24 +90,45 @@ class MainFragment : Fragment() {
             btmSheetDelete.setOnClickListener {
                 viewModel.delete(task)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                refreshView()
+                refreshView(view.context)
 
             }
 
             btmSheetUpdate.setOnClickListener {
-                val action: NavDirections =MainFragmentDirections.actionMainFragmentToDialogWithData(task)
+                val action: NavDirections =
+                    MainFragmentDirections.actionMainFragmentToDialogWithData(task)
                 view.findNavController().navigate(action)
-             //   DialogWithData().show(parentFragmentManager, DialogWithData.TAG)
+                //   DialogWithData().show(parentFragmentManager, DialogWithData.TAG)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-               // refreshView()
+                refreshView(view.context)
 
             }
 
-            //not working use new fragments,nav instead!!
-           /* viewModel.name.observeForever {
-                tvname.text = it
-                Toast.makeText(view.context,"I SEE YOU: $it, name:${tvname.text}",Toast.LENGTH_LONG).show()
-            }*/
+
+            bottomSheetBehavior.addBottomSheetCallback(object :
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                        view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.white))
+                        Log.v("color", "white?")
+                        refreshView(view.context)
+                    }
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.white))
+                        Log.v("color", "white?")
+                        refreshView(view.context)
+                    }
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+
+                    }
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    transitionBottomSheetParentView(slideOffset, view)
+                }
+            })
+
 
         })
 
@@ -119,9 +154,23 @@ class MainFragment : Fragment() {
 
     }
 
-    fun refreshView() {
+    private fun transitionBottomSheetParentView(slideOffset: Float, view: View) {
+        Log.v("onslide", "down$slideOffset")
+        if (slideOffset > 0) {
+            //Log.e("onslide", "up$slideOffset")
+            val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, 0x8189b3, Color.GRAY)
+            view.setBackgroundColor(argbEvaluator as Int)
+        } else {
+            //Log.v("onslide","down$slideOffset")
+            val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, Color.GRAY, 0x8189b3)
+            view.setBackgroundColor(argbEvaluator as Int)
+        }
+
+    }
+
+    fun refreshView(context: Context) {
         viewModel.getAllTasks().observeForever(Observer {
-            recyclerView.adapter = Adapter(it, viewModel)
+            recyclerView.adapter = Adapter(it, viewModel, context)
 
         })
     }

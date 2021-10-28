@@ -57,4 +57,7 @@ class Repo(context: Context) {
     suspend fun update(task: Task) = withContext(Dispatchers.IO) {
         appDB.taskDao.update(task)
     }
+    suspend fun updateState(state:Boolean,id:Int) = withContext(Dispatchers.IO) {
+        appDB.taskDao.updateState(state,id)
+    }
 }

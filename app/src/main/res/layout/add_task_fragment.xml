@@ -64,7 +64,7 @@
             android:id="@+id/addDueDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint=" /  / "
+            android:hint="dd-mm-yyyy"
             android:textSize="23sp" />
         <ImageButton
             android:id="@+id/addDatePick"
