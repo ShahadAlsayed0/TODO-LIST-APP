@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".add.AddTaskFragment">
+    tools:context=".fragment.AddTaskFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +13,14 @@
         android:layout_marginHorizontal="30sp"
         android:padding="10sp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
             android:layout_marginRight="20sp"
             android:textSize="23sp" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/addTitle"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
@@ -34,14 +34,14 @@
         android:layout_marginHorizontal="30sp"
         android:padding="10sp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
             android:layout_marginRight="20sp"
             android:textSize="23sp" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/addDescription"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
@@ -54,13 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30sp"
         android:padding="10sp">
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
             android:layout_marginRight="20sp"
             android:textSize="23sp" />
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addDueDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,14 +82,14 @@
         android:layout_marginHorizontal="30sp"
         android:padding="10sp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tag"
             android:layout_marginRight="20sp"
             android:textSize="23sp" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/addTag"
             android:layout_width="200sp"
             android:layout_height="wrap_content"

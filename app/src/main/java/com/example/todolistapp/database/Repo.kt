@@ -13,6 +13,7 @@ class Repo(context: Context) {
     suspend fun getAllTasks(): List<Task> = withContext(Dispatchers.IO) {
         appDB.taskDao.getAllTasks()
     }
+
     suspend fun insertTask(task: Task) = withContext(Dispatchers.IO) {
         appDB.taskDao.insertTask(task)
         /*    val task1 = Task(
@@ -32,20 +33,28 @@ class Repo(context: Context) {
              }
          }*/
     }
-    suspend fun selectTaskByID(id:Int): Task  = withContext(Dispatchers.IO) {
+
+    suspend fun selectTaskByID(id: Int): Task = withContext(Dispatchers.IO) {
         appDB.taskDao.selectTaskByID(id)
     }
-    suspend fun selectTaskByTitle(title:String): Task = withContext(Dispatchers.IO){
+
+    suspend fun selectTaskByTitle(title: String): Task = withContext(Dispatchers.IO) {
         appDB.taskDao.selectTaskByTitle(title)
     }
-    suspend fun selectTaskByTag(tag:String): Task =  withContext(Dispatchers.IO) {
+
+    suspend fun selectTaskByTag(tag: String): Task = withContext(Dispatchers.IO) {
         appDB.taskDao.selectTaskByTag(tag)
     }
 
-    suspend fun deleteByID(id:Int)= withContext(Dispatchers.IO) {
+    suspend fun deleteByID(id: Int) = withContext(Dispatchers.IO) {
         appDB.taskDao.deleteByID(id)
     }
-    suspend fun delete(task: Task)= withContext(Dispatchers.IO) {
+
+    suspend fun delete(task: Task) = withContext(Dispatchers.IO) {
         appDB.taskDao.delete(task)
+    }
+
+    suspend fun update(task: Task) = withContext(Dispatchers.IO) {
+        appDB.taskDao.update(task)
     }
 }

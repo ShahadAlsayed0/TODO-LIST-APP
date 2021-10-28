@@ -1,9 +1,11 @@
 package com.example.todolistapp.database.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "task_table")
 //@Entity(indices = {@Index(value = {"title"},unique = true)})
 data class Task(
@@ -16,7 +18,7 @@ data class Task(
     val createDescription: String?,
     val overDueDescription: String?,
     val Tag:String//new
-) {
+) : Parcelable {
     constructor(
         title: String,
         createDate: String,
@@ -50,6 +52,7 @@ data class Task(
         overDueDescription,
         Tag//new
     )
+
 }
 /*
 

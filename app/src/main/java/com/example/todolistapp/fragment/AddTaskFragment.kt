@@ -1,6 +1,5 @@
-package com.example.todolistapp.add
+package com.example.todolistapp.fragment
 
-import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,25 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+
 import androidx.navigation.findNavController
-import com.example.todolistapp.R
+import com.example.todolistapp.*
 //import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.model.Task
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class AddTaskFragment : Fragment() {
-    private lateinit var title: EditText
-    private lateinit var description: EditText
-    private lateinit var tag: EditText
+    private lateinit var title: androidx.appcompat.widget.AppCompatEditText
+    private lateinit var description: androidx.appcompat.widget.AppCompatEditText
+    private lateinit var tag: androidx.appcompat.widget.AppCompatEditText
     private lateinit var datepick: ImageButton
-    private lateinit var selectedDate: TextView
+    private lateinit var selectedDate: androidx.appcompat.widget.AppCompatTextView
     private lateinit var addTask: Button
     private lateinit var cancel: Button
 
 
-    private lateinit var viewModel: AddTaskViewModel
+    private lateinit var viewModel: SharedViewModel
 
 
     companion object {
@@ -43,24 +40,12 @@ class AddTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddTaskViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
         findView(view)
-
         datepick.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            DatePickerDialog(
-                view.context,
-                { _, y, m, d ->
-                    selectedDate.text = "$d/$m/$y"
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-                .show()
+            selectedDate.text = view.pickDate()
         }
-
         cancel.setOnClickListener {
             view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
             // view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
@@ -68,7 +53,7 @@ class AddTaskFragment : Fragment() {
         }
 
         addTask.setOnClickListener {
-            if (title.text.isNotEmpty()) {
+            if (title.text.toString().isNotEmpty()) {
                 /*       // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
                        // ${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
                         Toast.makeText(
@@ -108,45 +93,33 @@ class AddTaskFragment : Fragment() {
 
     }
 
+
     private fun addTag(): String? {
-        return if (tag.text.isNotEmpty()) {
+        return if (tag.text.toString().isNotEmpty()) {
             tag.text.toString()
         } else null
     }
-
     private fun addTask(): Task {
-      return  addTag()?.let {
+        return addTag()?.let {
             Task(
                 title.text.toString(),
                 getCurrentDate(),
-                ifEmptyThenNull(selectedDate.text.toString()),
+                selectedDate.text.toString().ifEmptyThenNull(),
                 false,
-                ifEmptyThenNull(description.text.toString()),
+                description.text.toString().ifEmptyThenNull(),
                 null,
                 it
             )
         } ?: Task(
             title.text.toString(),
             getCurrentDate(),
-            ifEmptyThenNull(selectedDate.text.toString()),
+            selectedDate.text.toString().ifEmptyThenNull(),
             false,
-            ifEmptyThenNull(description.text.toString()),
+            description.text.toString().ifEmptyThenNull(),
             null,
         )
 
     }
-
-    private fun ifEmptyThenNull(text: String): String? {
-        return if (text.isEmpty()) null else text
-    }
-
-    private fun getCurrentDate(): String {
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        //Toast.makeText(view.context," Date : $formatted ",Toast.LENGTH_SHORT).show()
-        return current.format(formatter)
-    }
-
     private fun findView(view: View) {
         title = view.findViewById(R.id.addTitle)
         description = view.findViewById(R.id.addDescription)

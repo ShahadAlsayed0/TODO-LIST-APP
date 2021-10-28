@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'//Room
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.31'//type converter
+    id 'kotlin-parcelize'//parcelize
+    id 'androidx.navigation.safeargs.kotlin'//nav args
 }
 
 android {

@@ -1,4 +1,4 @@
-package com.example.todolistapp.main
+package com.example.todolistapp.fragment.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,11 +12,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
+import com.example.todolistapp.SharedViewModel
+import com.example.todolistapp.update.DialogWithData
+import com.example.todolistapp.update.DialogWithDataArgs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -32,11 +36,12 @@ class MainFragment : Fragment() {
     private lateinit var btmSheetDelete: Button
     private lateinit var btmSheetUpdate: Button
 
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +54,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         findView(view)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         refreshView()
@@ -74,16 +79,23 @@ class MainFragment : Fragment() {
                 refreshView()
 
             }
-            btmSheetUpdate.setOnClickListener {
 
+            btmSheetUpdate.setOnClickListener {
+                val action: NavDirections =MainFragmentDirections.actionMainFragmentToDialogWithData(task)
+                view.findNavController().navigate(action)
+             //   DialogWithData().show(parentFragmentManager, DialogWithData.TAG)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                refreshView()
+               // refreshView()
+
             }
 
+            //not working use new fragments,nav instead!!
+           /* viewModel.name.observeForever {
+                tvname.text = it
+                Toast.makeText(view.context,"I SEE YOU: $it, name:${tvname.text}",Toast.LENGTH_LONG).show()
+            }*/
 
         })
-
-
 
 
         // recyclerView.startLayoutAnimation()
@@ -105,15 +117,15 @@ class MainFragment : Fragment() {
         }
 
 
-
     }
 
-fun refreshView(){
-    viewModel.getAllTasks().observeForever(Observer {
-        recyclerView.adapter = Adapter(it, viewModel)
+    fun refreshView() {
+        viewModel.getAllTasks().observeForever(Observer {
+            recyclerView.adapter = Adapter(it, viewModel)
 
-    })
-}
+        })
+    }
+
     private fun findView(view: View) {
         recyclerView = view.findViewById(R.id.rvRecycleView)
         addButton = view.findViewById(R.id.btnAdd)
@@ -126,6 +138,8 @@ fun refreshView(){
         tvSubTitle = view.findViewById(R.id.tvSubtitle)
         btmSheetDelete = view.findViewById(R.id.btmSheetDelete)
         btmSheetUpdate = view.findViewById(R.id.btmSheetUpdate)
+
+
     }
 }
 

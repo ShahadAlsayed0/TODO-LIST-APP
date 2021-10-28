@@ -1,4 +1,4 @@
-package com.example.todolistapp.main
+package com.example.todolistapp.fragment.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
+import com.example.todolistapp.SharedViewModel
 import com.example.todolistapp.database.model.Task
 
-class Adapter(private val tasksList: List<Task>, private val viewModel: MainViewModel) :
+class Adapter(private val tasksList: List<Task>, private val viewModel: SharedViewModel) :
     RecyclerView.Adapter<Adapter.ItemAdapter>() {
     var onItemClick: ((Task) -> Unit)? = null
 
