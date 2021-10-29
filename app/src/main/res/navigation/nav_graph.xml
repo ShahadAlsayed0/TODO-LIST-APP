@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.todolistapp.fragment.main.MainFragment"
+        android:name="com.example.todolistapp.ui.main.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
@@ -23,28 +23,18 @@
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.example.todolistapp.fragment.AddTaskFragment"
+        android:name="com.example.todolistapp.ui.add.AddTaskFragment"
         android:label="add_task_fragment"
         tools:layout="@layout/add_task_fragment" >
         <action
             android:id="@+id/action_addTaskFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
-        <action
-            android:id="@+id/action_addTaskFragment_to_testRoomData2"
-            app:destination="@id/testRoomData2" />
+
     </fragment>
-    <fragment
-        android:id="@+id/testRoomData2"
-        android:name="com.example.todolistapp.testRoom.TestRoomData"
-        android:label="test_room_data"
-        tools:layout="@layout/test_room_data" >
-        <action
-            android:id="@+id/action_testRoomData2_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
-    </fragment>
+
     <dialog
         android:id="@+id/dialogWithData"
-        android:name="com.example.todolistapp.update.DialogWithData"
+        android:name="com.example.todolistapp.ui.update.DialogWithData"
         android:label="fragment_dialog_with_data"
         tools:layout="@layout/fragment_dialog_with_data" >
         <action

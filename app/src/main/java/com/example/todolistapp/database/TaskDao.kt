@@ -34,8 +34,19 @@ interface TaskDao {
     @Query("delete from task_table where id==:id")
     suspend fun deleteByID(id:Int)
 
-    @Query("select * From task_table ")
-    suspend fun getAllTasksAlpha(): List<Task>
+    @Query("select * From task_table order by title ASC ")
+    suspend fun getAllTasksASC(): List<Task>
+
+    @Query("select * From task_table order by title DESC ")
+    suspend fun getAllTasksDESC(): List<Task>
+
+
+    @Query("select * From task_table order by dueDate ")
+    suspend fun getAllTasksTime(): List<Task>
+
+
+    @Query("select * From task_table where Tag=:tag ")
+    suspend fun getTaskByTag(tag:String): List<Task>
 
 
     //should add query

@@ -6,8 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.todolistapp.database.model.Task
-//import com.example.todolistapp.database.data.TaskToTag
-//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.typeconverters.Converters
 
 

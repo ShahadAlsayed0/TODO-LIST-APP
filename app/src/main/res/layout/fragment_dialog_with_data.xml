@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".update.DialogWithData"
+    tools:context=".ui.update.DialogWithData"
     android:padding="@dimen/dimen_12">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -47,13 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newDescription"
         android:id="@+id/dateLinear"
         android:padding="10sp">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:layout_marginRight="30sp"
-        android:layout_gravity="center_vertical"
-        android:textSize="@dimen/font_size_16" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/newDueDate"
         android:layout_width="wrap_content"
@@ -74,7 +68,7 @@
         android:layout_width="@dimen/wrap_constraints"
         android:layout_height="@dimen/dimen_48"
         android:layout_marginTop="@dimen/dimen_16"
-        android:text="@string/label_submit"
+        android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateLinear" />

@@ -9,14 +9,16 @@
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/drawable/ic_baseline_add_white.xml" value="0.2203125" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/drawable/ic_close_black_24dp.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/drawable/item_bg.xml" value="0.1546875" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/drawable/item_completed.xml" value="0.2203125" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/drawable/item_overdue.xml" value="0.2203125" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/activity_add_task.xml" value="0.19010416666666666" />
-        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/activity_main.xml" value="0.1828125" />
-        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/add_task_fragment.xml" value="0.26644736842105265" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/add_task_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/bottom_sheet.xml" value="0.1703125" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/fragment_dialog_with_data.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/fragment_scrolling.xml" value="0.19010416666666666" />
-        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/layout_persistent_bottom_sheet.xml" value="0.16853932584269662" />
-        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/main_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/layout_persistent_bottom_sheet.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/main_fragment.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/recycle_view_item.xml" value="0.23904382470119523" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/test_room_data.xml" value="0.5" />
         <entry key="..\:/Users/Administrator/Desktop/android projects/TODOLISTAPP/app/src/main/res/layout/test_room_main_fragment.xml" value="0.18229166666666666" />

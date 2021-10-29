@@ -1,6 +1,5 @@
-package com.example.todolistapp.update
+package com.example.todolistapp.ui.update
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,26 +10,18 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todolistapp.*
 import com.example.todolistapp.database.model.Task
-import java.util.*
+import com.example.todolistapp.ui.main.MainFragment
 
-class DialogWithData : DialogFragment() {
+class DialogWithData() : DialogFragment() {
     private lateinit var viewModel: SharedViewModel
     private lateinit var btnSubmit: Button
     private lateinit var title: AppCompatEditText
     private lateinit var description: AppCompatEditText
     private lateinit var datepick: ImageButton
     private lateinit var selectedDate: AppCompatTextView
-
-    companion object {
-
-        const val TAG = "DialogWithData"
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,39 +44,53 @@ class DialogWithData : DialogFragment() {
         selectedDate.hint = originalTask.dueDate
 
         datepick.setOnClickListener {
-            selectedDate.text = view.pickDate()
+            selectedDate.pickDate()
         }
-
 
         btnSubmit.setOnClickListener {
 
-            val newTitle =  title.text.toString().ifEmptyThenNull() ?: originalTask.title
-            val newDescription = description.text.toString().ifEmptyThenNull() ?: originalTask.createDescription
+            val newTitle = title.text.toString().ifEmptyThenNull() ?: originalTask.title
+            val newDescription =
+                description.text.toString().ifEmptyThenNull() ?: originalTask.createDescription
             val newDueDate = selectedDate.text.toString().ifEmptyThenNull() ?: originalTask.dueDate
 
-            viewModel.update(updateTask(newTitle,newDescription,newDueDate,originalTask.id,originalTask.Tag))
+            viewModel.update(
+                updateTask(
+                    newTitle,
+                    newDescription,
+                    newDueDate,
+                    originalTask.id,
+                    originalTask.Tag
+                )
+            )
 
 
-
-          /*  val action: NavDirections = DialogWithDataDirections.actionDialogWithDataToMainFragment(true)
-            view.findNavController().navigate(action)*/
 
             dismiss()
         }
 
     }
-private fun updateTask(newTitle:String, newDescription:String?, newDueDate:String?,originalID:Int,originalTAG:String):Task{
-    return Task(
-        originalID,
-        newTitle,
-        getCurrentDate(),
-        newDueDate,
-        false,
-        newDescription,
-        null,
-        originalTAG
-    )
-}
+
+    private fun updateTask(
+        newTitle: String,
+        newDescription: String?,
+        newDueDate: String?,
+        originalID: Int,
+        originalTAG: String
+    ): Task {
+        return Task(
+
+            newTitle,
+            getCurrentDate(),
+            newDueDate,
+            false,
+            newDescription,
+            null,
+            originalTAG,
+            originalID
+        )
+    }
+
     private fun findView(view: View) {
         btnSubmit = view.findViewById(R.id.btnSubmit)
         title = view.findViewById(R.id.newTitle)
@@ -101,9 +106,4 @@ private fun updateTask(newTitle:String, newDescription:String?, newDueDate:Strin
             WindowManager.LayoutParams.WRAP_CONTENT
         )
     }
-
-    private fun setupClickListeners() {
-
-    }
-
 }

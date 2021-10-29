@@ -1,16 +1,15 @@
-package com.example.todolistapp.fragment
+package com.example.todolistapp.ui.add
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
 import androidx.navigation.findNavController
 import com.example.todolistapp.*
-//import com.example.todolistapp.database.data.Tag
 import com.example.todolistapp.database.model.Task
 
 class AddTaskFragment : Fragment() {
@@ -24,11 +23,6 @@ class AddTaskFragment : Fragment() {
 
 
     private lateinit var viewModel: SharedViewModel
-
-
-    companion object {
-        fun newInstance() = AddTaskFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,48 +38,18 @@ class AddTaskFragment : Fragment() {
 
         findView(view)
         datepick.setOnClickListener {
-            selectedDate.text = view.pickDate()
+
+            selectedDate.pickDate()
+          //  Log.e("DATE",selectedDate.text.toString())
         }
         cancel.setOnClickListener {
             view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
-            // view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
-
         }
 
         addTask.setOnClickListener {
             if (title.text.toString().isNotEmpty()) {
-                /*       // ${LocalDateTime.now( ZoneId.of(ZoneId.systemDefault().id))}
-                       // ${LocalDateTime.now(TimeZone.getDefault().toZoneId())}
-                        Toast.makeText(
-                            view.context,
-                            " result : ${LocalDateTime.now(TimeZone.getDefault().toZoneId())} ",
-                            Toast.LENGTH_LONG
-                        ).show()
-                       //   viewModel.insertTask(addTask())
-                       viewModel.insertTask(addTask())
-
-                       addTag()?.let { tag ->
-                           viewModel.insertTag(tag)
-                       }
-
-                       if (newTagCheck.isChecked) {
-                          // viewModel.insertTaskToTag(TAGID, TASKID)
-                       }
-                      if(toDoCheck.isChecked) {
-                         // viewModel.insertTaskToTag(TODOTAG.id, TASKID)
-                      }
-               */
-
-                /* addTag()?.let { tag ->
-                         viewModel.insertTaskANDTag(addTask(),tag)
-                     }*/
-
-
                 viewModel.insertTask(addTask())
-
                 view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
-                //  view.findNavController().navigate(R.id.action_addTaskFragment_to_testRoomData2)
-
             } else {
                 Toast.makeText(view.context, "Must Enter a Title", Toast.LENGTH_SHORT).show()
             }
