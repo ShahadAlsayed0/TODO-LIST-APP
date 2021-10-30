@@ -22,6 +22,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolistapp.MainActivity
 import com.example.todolistapp.R
 import com.example.todolistapp.SharedViewModel
 import com.example.todolistapp.database.model.Task
@@ -41,9 +42,9 @@ class MainFragment : Fragment() {
     private lateinit var creationdate: TextView
     private lateinit var tag: TextView
     private lateinit var bottom_text: TextView
+    private lateinit var sort: TextView
     private lateinit var deleteBtn_BS: Button
     private lateinit var updateBtn_BS: Button
-
     private lateinit var viewModel: SharedViewModel
 
     override fun onCreateView(
@@ -66,6 +67,14 @@ class MainFragment : Fragment() {
 
         addButton.setOnClickListener() {
             view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
+        }
+
+        sort.setOnClickListener {
+            viewModel.sortTasksASC().observe(viewLifecycleOwner,{
+                recyclerView.adapter = Adapter(it, viewModel, view.context)
+                recyclerView.startLayoutAnimation()
+            })
+
         }
 
         //get selected item from recycler view
@@ -183,6 +192,7 @@ class MainFragment : Fragment() {
         creationdate = view.findViewById(R.id.detailcreationdate)
         tag = view.findViewById(R.id.detailtags)
         bottom_text = view.findViewById(R.id.bottom_text)
+        sort = view.findViewById(R.id.sort)
 
     }
 }
