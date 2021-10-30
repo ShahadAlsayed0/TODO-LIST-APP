@@ -11,7 +11,7 @@ This is a To do list app
 It’s a list of tasks you need to complete, or things that you want to do.
 you can add, edit, delete and sort tasks
 
-####Concepts that have been implemented:
+Concepts that have been implemented:
 
 Recycler View, Fragments, Fragments Navigation, View Model, Repository Pattern, Live Data, Room Database, Coroutines, Parcelize, Extensions, Bottom sheet, Sort through data from Room
 
