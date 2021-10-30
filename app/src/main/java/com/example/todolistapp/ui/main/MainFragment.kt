@@ -149,7 +149,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun refreshSorted(view: View, order: String) {
+    private fun refreshSorted(view: View, order: String) {
         when (order) {
             "A-Z" -> {
                 viewModel.sortTasksASC().observe(viewLifecycleOwner, {
@@ -160,6 +160,20 @@ class MainFragment : Fragment() {
 
             "Z-A" -> {
                 viewModel.sortTasksDESC().observe(viewLifecycleOwner, {
+                    recyclerView.adapter = Adapter(it, viewModel, view.context)
+                    recyclerView.startLayoutAnimation()
+                })
+
+            }
+            "creation date" -> {
+                viewModel.sortTasksCreationDate().observe(viewLifecycleOwner, {
+                    recyclerView.adapter = Adapter(it, viewModel, view.context)
+                    recyclerView.startLayoutAnimation()
+                })
+
+            }
+            "Due Date" -> {
+                viewModel.sortTasksDueDate().observe(viewLifecycleOwner, {
                     recyclerView.adapter = Adapter(it, viewModel, view.context)
                     recyclerView.startLayoutAnimation()
                 })

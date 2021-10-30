@@ -10,7 +10,7 @@ import java.util.*
      fun TextView.pickDate() {
         val calendar = Calendar.getInstance()
              DatePickerDialog(this.context, { _, y, m, d ->
-               this.text=  "$d-${m+1}-$y"
+               this.text=  "$y-${m+1}-$d"
                  },
                  calendar.get(Calendar.YEAR),
                  calendar.get(Calendar.MONTH),
@@ -25,7 +25,7 @@ import java.util.*
 
      fun getCurrentDate(): String {
         val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("d-mm-yyyy")
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-d")
         return current.format(formatter)
     }
 

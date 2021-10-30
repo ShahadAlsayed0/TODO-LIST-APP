@@ -52,4 +52,11 @@ class Repo(context: Context) {
     suspend fun sortTasksDESC(): List<Task> = withContext(Dispatchers.IO) {
         appDB.taskDao.sortTasksDESC()
     }
+     suspend fun sortTasksCreationDate(): List<Task> = withContext(Dispatchers.IO) {
+        appDB.taskDao.sortTasksCreationDate()
+    }
+ suspend fun sortTasksDueDate(): List<Task> = withContext(Dispatchers.IO) {
+        appDB.taskDao.sortTasksDueDate()
+    }
+
 }

@@ -64,4 +64,19 @@ class SharedViewModel(context: Application) : AndroidViewModel(context) {
         }
         return tasks
     }
+    fun sortTasksCreationDate(): MutableLiveData<List<Task>> {
+        val tasks = MutableLiveData<List<Task>>()
+        viewModelScope.launch {
+            tasks.postValue(repo.sortTasksCreationDate())
+        }
+        return tasks
+    }
+ fun sortTasksDueDate(): MutableLiveData<List<Task>> {
+        val tasks = MutableLiveData<List<Task>>()
+        viewModelScope.launch {
+            tasks.postValue(repo.sortTasksDueDate())
+        }
+        return tasks
+    }
+
 }
