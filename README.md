@@ -6,20 +6,18 @@
 
 ## :scroll: Description
 ---
-//This is my application description, what you have learned and what you, and what the ideas you have added in this app
 
 This is a To do list app
 It’s a list of tasks you need to complete, or things that you want to do.
-you can add, edit and delete tasks
+you can add, edit, delete and sort tasks
 
-//what the ideas you have added in this app
+####Concepts that have been implemented:
 
-Concepts that have been implemented:
-Recycler View, Fragments, Fragments Navigation, View Model, Repository Pattern, Live Data, Room Database, Coroutines, Parcelize, Extensions, Bottom sheet, Sort through data
+Recycler View, Fragments, Fragments Navigation, View Model, Repository Pattern, Live Data, Room Database, Coroutines, Parcelize, Extensions, Bottom sheet, Sort through data from Room
 
 ## :bulb: Motivation and Context
 ---
-//Write your motivation here
+
 This application was made for - Tuwaiq Academy 'Android Capstone 1 Assignment' 
 ## :camera_flash: Screenshots
 ---
