@@ -20,19 +20,13 @@ you can add, edit and delete tasks
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
-<img src="app/src/main/res/drawable/result/empty.JPG" width="200">
-<img src="app/src/main/res/drawable/result/list.JPG" width="200">
-
+<img src="app/src/main/res/drawable/result/empty.JPG" width="260"> <img src="app/src/main/res/drawable/result/list.JPG" width="260">
 
 ### screenshot_2
-<img src="app/src/main/res/drawable/result/done bottomsheet.JPG" width="260">
-<img src="app/src/main/res/drawable/result/normal bottomsheet.JPG" width="260">
-<img src="app/src/main/res/drawable/result/overdue bottomsheet.JPG" width="260">
+<img src="app/src/main/res/drawable/result/done bottomsheet.JPG" width="260"> <img src="app/src/main/res/drawable/result/normal bottomsheet.JPG" width="260"> <img src="app/src/main/res/drawable/result/overdue bottomsheet.JPG" width="260">
 
 ### screenshot_3
-<img src="app/src/main/res/drawable/result/add.JPG" width="260">
-<img src="app/src/main/res/drawable/result/update dialog.JPG" width="260">
-<img src="app/src/main/res/drawable/result/delete alert.JPG" width="260">
+<img src="app/src/main/res/drawable/result/add.JPG" width="260"> <img src="app/src/main/res/drawable/result/update dialog.JPG" width="260"> <img src="app/src/main/res/drawable/result/delete alert.JPG" width="260">
 
 ### screenshot_4
 <img src="app/src/main/res/drawable/result/sort list.JPG" width="260">
