@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
 import com.example.todolistapp.SharedViewModel
@@ -17,9 +20,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 
 class Adapter(
-    private val tasksList: List<Task>,
+    private var tasksList: List<Task>,
     private val viewModel: SharedViewModel,
-    private val context: Context
+    private val context: Context,
 ) :
     RecyclerView.Adapter<Adapter.ItemAdapter>() {
 
@@ -38,21 +41,13 @@ class Adapter(
         holder.tagsTextView.text = task.Tag
         holder.checkbox.isChecked = task.completed
 
-        if (!holder.dDateTextView.text.toString().isNullOrEmpty()) {
-            if (holder.dDateTextView.text.toString() < getCurrentDate()) {
-                holder.checkbox.isEnabled = false
-                holder.itemlayout.background= context.resources.getDrawable(R.drawable.item_overdue)
-                holder.dDateTextView.setTextColor(context.resources.getColor(R.color.red))
-            }
-        }
+        checkItem(task, holder)
 
-        if (holder.checkbox.isChecked) {//in the start
-            holder.itemlayout.background= context.resources.getDrawable(R.drawable.item_completed)
-        }
         holder.checkbox.setOnClickListener {
             if (holder.checkbox.isChecked) {
                 viewModel.updateState(true, task.id)
-                holder.itemlayout.background= context.resources.getDrawable(R.drawable.item_completed)
+                holder.itemlayout.background =
+                    context.resources.getDrawable(R.drawable.item_completed)
             }
             if (!holder.checkbox.isChecked) {
                 viewModel.updateState(false, task.id)
@@ -65,10 +60,24 @@ class Adapter(
 
     }
 
+
     override fun getItemCount(): Int {
         return tasksList.size
     }
 
+    private fun checkItem(task: Task, holder: ItemAdapter) {
+        if (!task.dueDate.isNullOrEmpty()) {//in the start
+            if (holder.dDateTextView.text.toString() < getCurrentDate() && !holder.checkbox.isChecked) {
+                holder.checkbox.isEnabled = false
+                holder.itemlayout.background =
+                    context.resources.getDrawable(R.drawable.item_overdue)
+                holder.dDateTextView.setTextColor(context.resources.getColor(R.color.red))
+            }
+        }
+        if (holder.checkbox.isChecked) {
+            holder.itemlayout.background = context.resources.getDrawable(R.drawable.item_completed)
+        }
+    }
 
     inner class ItemAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

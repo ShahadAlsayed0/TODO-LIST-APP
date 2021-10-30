@@ -2,7 +2,6 @@ package com.example.todolistapp.ui.add
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +11,16 @@ import androidx.navigation.findNavController
 import com.example.todolistapp.*
 import com.example.todolistapp.database.model.Task
 
+
+
 class AddTaskFragment : Fragment() {
     private lateinit var title: androidx.appcompat.widget.AppCompatEditText
     private lateinit var description: androidx.appcompat.widget.AppCompatEditText
     private lateinit var tag: androidx.appcompat.widget.AppCompatEditText
     private lateinit var datepick: ImageButton
     private lateinit var selectedDate: androidx.appcompat.widget.AppCompatTextView
-    private lateinit var addTask: Button
-    private lateinit var cancel: Button
+    private lateinit var addBtn: Button
+    private lateinit var cancelBtn: Button
 
 
     private lateinit var viewModel: SharedViewModel
@@ -38,20 +39,19 @@ class AddTaskFragment : Fragment() {
 
         findView(view)
         datepick.setOnClickListener {
-
             selectedDate.pickDate()
-          //  Log.e("DATE",selectedDate.text.toString())
+
         }
-        cancel.setOnClickListener {
+
+
+        cancelBtn.setOnClickListener {
             view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
         }
 
-        addTask.setOnClickListener {
+        addBtn.setOnClickListener {
             if (title.text.toString().isNotEmpty()) {
                 viewModel.insertTask(addTask())
                 view.findNavController().navigate(R.id.action_addTaskFragment_to_mainFragment)
-            } else {
-                Toast.makeText(view.context, "Must Enter a Title", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -63,6 +63,7 @@ class AddTaskFragment : Fragment() {
             tag.text.toString()
         } else null
     }
+
     private fun addTask(): Task {
         return addTag()?.let {
             Task(
@@ -71,7 +72,6 @@ class AddTaskFragment : Fragment() {
                 selectedDate.text.toString().ifEmptyThenNull(),
                 false,
                 description.text.toString().ifEmptyThenNull(),
-                null,
                 it
             )
         } ?: Task(
@@ -80,7 +80,6 @@ class AddTaskFragment : Fragment() {
             selectedDate.text.toString().ifEmptyThenNull(),
             false,
             description.text.toString().ifEmptyThenNull(),
-            null,
         )
 
     }
@@ -90,8 +89,8 @@ class AddTaskFragment : Fragment() {
         tag = view.findViewById(R.id.addTag)
         selectedDate = view.findViewById(R.id.addDueDate)
         datepick = view.findViewById(R.id.addDatePick)
-        addTask = view.findViewById(R.id.addpageaddbtn)
-        cancel = view.findViewById(R.id.addPageCancelbtn)
+        addBtn = view.findViewById(R.id.addpageaddbtn)
+        cancelBtn = view.findViewById(R.id.addPageCancelbtn)
 
     }
 

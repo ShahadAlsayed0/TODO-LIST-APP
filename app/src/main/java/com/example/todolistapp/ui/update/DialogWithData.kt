@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.todolistapp.*
 import com.example.todolistapp.database.model.Task
-import com.example.todolistapp.ui.main.MainFragment
 
 class DialogWithData() : DialogFragment() {
     private lateinit var viewModel: SharedViewModel
@@ -48,7 +47,6 @@ class DialogWithData() : DialogFragment() {
         }
 
         btnSubmit.setOnClickListener {
-
             val newTitle = title.text.toString().ifEmptyThenNull() ?: originalTask.title
             val newDescription =
                 description.text.toString().ifEmptyThenNull() ?: originalTask.createDescription
@@ -63,12 +61,8 @@ class DialogWithData() : DialogFragment() {
                     originalTask.Tag
                 )
             )
-
-
-
             dismiss()
         }
-
     }
 
     private fun updateTask(
@@ -79,13 +73,11 @@ class DialogWithData() : DialogFragment() {
         originalTAG: String
     ): Task {
         return Task(
-
             newTitle,
             getCurrentDate(),
             newDueDate,
             false,
             newDescription,
-            null,
             originalTAG,
             originalID
         )

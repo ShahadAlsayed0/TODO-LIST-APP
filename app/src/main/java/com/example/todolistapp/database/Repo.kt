@@ -1,6 +1,7 @@
 package com.example.todolistapp.database
 
 import android.content.Context
+import androidx.room.Query
 import com.example.todolistapp.database.model.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -39,7 +40,16 @@ class Repo(context: Context) {
     suspend fun update(task: Task) = withContext(Dispatchers.IO) {
         appDB.taskDao.update(task)
     }
-    suspend fun updateState(state:Boolean,id:Int) = withContext(Dispatchers.IO) {
-        appDB.taskDao.updateState(state,id)
+
+    suspend fun updateState(state: Boolean, id: Int) = withContext(Dispatchers.IO) {
+        appDB.taskDao.updateState(state, id)
+    }
+
+    suspend fun sortTasksASC(): List<Task> = withContext(Dispatchers.IO) {
+        appDB.taskDao.sortTasksASC()
+    }
+
+    suspend fun sortTasksDESC(): List<Task> = withContext(Dispatchers.IO) {
+        appDB.taskDao.sortTasksDESC()
     }
 }

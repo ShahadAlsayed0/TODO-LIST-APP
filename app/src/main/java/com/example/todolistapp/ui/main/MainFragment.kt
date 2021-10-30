@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolistapp.R
 import com.example.todolistapp.SharedViewModel
+import com.example.todolistapp.database.model.Task
 import com.example.todolistapp.getCurrentDate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,11 +39,10 @@ class MainFragment : Fragment() {
     private lateinit var tvTitle: TextView
     private lateinit var tvSubTitle: TextView
     private lateinit var creationdate: TextView
-    private lateinit var state: TextView
     private lateinit var tag: TextView
     private lateinit var bottom_text: TextView
-    private lateinit var btmSheetDelete: Button
-    private lateinit var btmSheetUpdate: Button
+    private lateinit var deleteBtn_BS: Button
+    private lateinit var updateBtn_BS: Button
 
     private lateinit var viewModel: SharedViewModel
 
@@ -62,53 +61,34 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         findView(view)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-
-        //animation at the start of loading the view
-        val lac =
-            LayoutAnimationController(AnimationUtils.loadAnimation(view.context, R.anim.item_anim))
-        lac.delay = 0.20f
-        lac.order = LayoutAnimationController.ORDER_NORMAL
-        recyclerView.layoutAnimation = lac
-        //recyclerView.startLayoutAnimation()
+        setAnimation(view)
         refreshView(view.context)
+
+        addButton.setOnClickListener() {
+            view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
+        }
 
         //get selected item from recycler view
         viewModel.taskLive.observeForever(Observer { task ->
+
 
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
             tvTitle.setText(task.title)
             tvSubTitle.text = task.createDescription
             creationdate.text = task.createDate
-
-
             tag.text = task.Tag
-            btmSheetDelete.setOnClickListener {
+
+            checkOverDue(task)
+            deleteBtn_BS.setOnClickListener {
                 viewModel.delete(task)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 refreshView(view.context)
-
             }
-            //working but not very good
-            if (!task.dueDate.isNullOrEmpty()) {
-                if (task.dueDate < getCurrentDate()) {
-                    btmSheetUpdate.isEnabled = false
-                    state.text = "Overdue"
-                    state.setTextColor(resources.getColor(R.color.red))
-                    bottom_text.text = "Overdue"
-                    bottom_text.setTextColor(resources.getColor(R.color.red))
 
-                } else {
-                    btmSheetUpdate.isEnabled = true
-                    state.text = ""
-                    bottom_text.text = ""
-                }
-            }
-            ///////
-            btmSheetUpdate.setOnClickListener {
+            updateBtn_BS.setOnClickListener {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 val action: NavDirections = MainFragmentDirections.actionMainFragmentToDialogWithData(task)
                 view.findNavController().navigate(action)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
 
             }
             bottomSheetBehavior.addBottomSheetCallback(object :
@@ -120,15 +100,12 @@ class MainFragment : Fragment() {
                         view.background = resources.getDrawable(R.drawable.background)
                         refreshView(view.context)
                         addButton.visibility = VISIBLE
-
                     }
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.white))
                         view.background = resources.getDrawable(R.drawable.background)
                         refreshView(view.context)
                         addButton.visibility = VISIBLE
-
-                      //  recyclerView.startLayoutAnimation()
 
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED||newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
@@ -142,16 +119,34 @@ class MainFragment : Fragment() {
             })
         })
 
-        /* val cDateTextView: TextView = itemView.findViewById(R.id.item_creation_date)
-                val completedTextView: TextView = itemView.findViewById(R.id.item_completed)
-                 val cDescriptionTextView: TextView = itemView.findViewById(R.id.item_Description_on_create)
-                 val oDDescriptionTextView: TextView = itemView.findViewById(R.id.item_Description_over_due)
-        */
 
+    }
 
-        addButton.setOnClickListener() {
-            view.findNavController().navigate(R.id.action_mainFragment_to_addTaskFragment)
+    companion object {
+        fun newInstance() = MainFragment()
+    }
+    private fun checkOverDue(task: Task){
+        if (!task.dueDate.isNullOrEmpty()) {
+            if (task.dueDate < getCurrentDate()&&!task.completed) {
+                updateBtn_BS.isEnabled = false
+                bottom_text.text = "Overdue"
+                bottom_text.setTextColor(resources.getColor(R.color.red))
+
+            } else {
+                updateBtn_BS.isEnabled = true
+                bottom_text.text = ""
+            }
         }
+    }
+
+    private fun setAnimation(view: View){
+        //animation at the start of loading the view
+        val lac =
+            LayoutAnimationController(AnimationUtils.loadAnimation(view.context, R.anim.item_anim))
+        lac.delay = 0.20f
+        lac.order = LayoutAnimationController.ORDER_NORMAL
+        recyclerView.layoutAnimation = lac
+        //recyclerView.startLayoutAnimation()
     }
 
     private fun transitionBottomSheetParentView(slideOffset: Float, view: View) {
@@ -183,11 +178,11 @@ class MainFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         tvTitle = view.findViewById(R.id.detailTitle)
         tvSubTitle = view.findViewById(R.id.detailSubtitle)
-        btmSheetDelete = view.findViewById(R.id.btmSheetDelete)
-        btmSheetUpdate = view.findViewById(R.id.btmSheetUpdate)
+        deleteBtn_BS = view.findViewById(R.id.btmSheetDelete)
+        updateBtn_BS = view.findViewById(R.id.btmSheetUpdate)
         creationdate = view.findViewById(R.id.detailcreationdate)
-        state = view.findViewById(R.id.detailcompleted)
         tag = view.findViewById(R.id.detailtags)
         bottom_text = view.findViewById(R.id.bottom_text)
+
     }
 }

@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">TODO LIST APP</string>
-
+    <string name="app_name">TODO APP</string>
+    <string-array name="category">
+        <item>To Do</item>
+        <item>Home Work</item>
+        <item>Groceries</item>
+        <item>Important</item>
+        <item>Work</item>
+    </string-array>
 </resources>

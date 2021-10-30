@@ -35,10 +35,10 @@ interface TaskDao {
     suspend fun deleteByID(id:Int)
 
     @Query("select * From task_table order by title ASC ")
-    suspend fun getAllTasksASC(): List<Task>
+    suspend fun sortTasksASC(): List<Task>
 
     @Query("select * From task_table order by title DESC ")
-    suspend fun getAllTasksDESC(): List<Task>
+    suspend fun sortTasksDESC(): List<Task>
 
 
     @Query("select * From task_table order by dueDate ")
