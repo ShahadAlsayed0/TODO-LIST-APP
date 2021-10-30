@@ -7,4 +7,11 @@
         <item>Important</item>
         <item>Work</item>
     </string-array>
+      <string-array name="Sorting">
+        <item>A-Z</item>
+        <item>Z-A</item>
+        <item>creation date</item>
+        <item>Due Date</item>
+    </string-array>
+
 </resources>

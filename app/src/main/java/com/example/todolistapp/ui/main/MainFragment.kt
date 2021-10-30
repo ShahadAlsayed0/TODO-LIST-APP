@@ -1,6 +1,7 @@
 package com.example.todolistapp.ui.main
 
 import android.animation.ArgbEvaluator
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
@@ -22,13 +23,14 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todolistapp.MainActivity
 import com.example.todolistapp.R
 import com.example.todolistapp.SharedViewModel
 import com.example.todolistapp.database.model.Task
 import com.example.todolistapp.getCurrentDate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.content.DialogInterface
+
 
 class MainFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -70,10 +72,7 @@ class MainFragment : Fragment() {
         }
 
         sort.setOnClickListener {
-            viewModel.sortTasksASC().observe(viewLifecycleOwner,{
-                recyclerView.adapter = Adapter(it, viewModel, view.context)
-                recyclerView.startLayoutAnimation()
-            })
+            sortDialog(view)
 
         }
 
@@ -96,7 +95,8 @@ class MainFragment : Fragment() {
 
             updateBtn_BS.setOnClickListener {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                val action: NavDirections = MainFragmentDirections.actionMainFragmentToDialogWithData(task)
+                val action: NavDirections =
+                    MainFragmentDirections.actionMainFragmentToDialogWithData(task)
                 view.findNavController().navigate(action)
 
             }
@@ -117,7 +117,7 @@ class MainFragment : Fragment() {
                         addButton.visibility = VISIBLE
 
                     }
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED||newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED || newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                         addButton.visibility = GONE
                     }
                 }
@@ -131,12 +131,47 @@ class MainFragment : Fragment() {
 
     }
 
-    companion object {
-        fun newInstance() = MainFragment()
+    private fun sortDialog(view: View) {
+        sort.setOnClickListener {
+            val sortList = resources.getStringArray(R.array.Sorting)
+            val materialAlertDialogBuilder = AlertDialog.Builder(view.context)
+            materialAlertDialogBuilder.setTitle("Sort")
+
+            materialAlertDialogBuilder.setItems(sortList) { dialog, item ->
+                sort.text = sortList[item]
+                refreshSorted(view, sortList[item])
+                dialog.dismiss()
+            }
+            /* materialAlertDialogBuilder.setNeutralButton(R.string.cancel) { dialog, _ ->
+                 dialog.cancel()
+             }*/
+            materialAlertDialogBuilder.show()
+        }
     }
-    private fun checkOverDue(task: Task){
+
+    fun refreshSorted(view: View, order: String) {
+        when (order) {
+            "A-Z" -> {
+                viewModel.sortTasksASC().observe(viewLifecycleOwner, {
+                    recyclerView.adapter = Adapter(it, viewModel, view.context)
+                    recyclerView.startLayoutAnimation()
+                })
+            }
+
+            "Z-A" -> {
+                viewModel.sortTasksDESC().observe(viewLifecycleOwner, {
+                    recyclerView.adapter = Adapter(it, viewModel, view.context)
+                    recyclerView.startLayoutAnimation()
+                })
+
+            }
+
+        }
+    }
+
+    private fun checkOverDue(task: Task) {
         if (!task.dueDate.isNullOrEmpty()) {
-            if (task.dueDate < getCurrentDate()&&!task.completed) {
+            if (task.dueDate < getCurrentDate() && !task.completed) {
                 updateBtn_BS.isEnabled = false
                 bottom_text.text = "Overdue"
                 bottom_text.setTextColor(resources.getColor(R.color.red))
@@ -148,7 +183,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setAnimation(view: View){
+    private fun setAnimation(view: View) {
         //animation at the start of loading the view
         val lac =
             LayoutAnimationController(AnimationUtils.loadAnimation(view.context, R.anim.item_anim))
