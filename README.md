@@ -22,7 +22,7 @@ This application was made for - Tuwaiq Academy 'Android Capstone 1 Assignment'
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
-<img src="app/src/main/res/drawable/result/empty.JPG" width="260" height="630"> <img src="app/src/main/res/drawable/result/list.JPG" width="260" height="630">
+<img src="app/src/main/res/drawable/result/empty.JPG" width="260" height="620"> <img src="app/src/main/res/drawable/result/list.JPG" width="260" height="620">
 
 ### screenshot_2
 <img src="app/src/main/res/drawable/result/done bottomsheet.JPG" width="260" height="630"> <img src="app/src/main/res/drawable/result/normal bottomsheet.JPG" width="260" height="630"> <img src="app/src/main/res/drawable/result/overdue bottomsheet.JPG" width="260" height="630">
