@@ -88,9 +88,8 @@ class MainFragment : Fragment() {
 
             checkOverDue(task)
             deleteBtn_BS.setOnClickListener {
-                viewModel.delete(task)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                refreshView(view.context)
+                deleteAlert(view,task)
+
             }
 
             updateBtn_BS.setOnClickListener {
@@ -130,7 +129,25 @@ class MainFragment : Fragment() {
 
 
     }
+    private fun deleteAlert(view: View,task: Task) {
 
+            val alert = AlertDialog.Builder(view.context)
+            alert.setTitle("delete")
+            alert.setIcon(R.drawable.alert)
+            alert.setMessage("Are you sure you want to delete this task?")
+
+            alert.setPositiveButton("Delete") { dialog, which ->
+                viewModel.delete(task)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                refreshView(view.context)
+            }
+
+            alert.setNeutralButton("Cancel") { dialog, which ->
+                dialog.cancel()
+            }
+            alert.show()
+
+    }
     private fun sortDialog(view: View) {
         sort.setOnClickListener {
             val sortList = resources.getStringArray(R.array.Sorting)
@@ -142,9 +159,6 @@ class MainFragment : Fragment() {
                 refreshSorted(view, sortList[item])
                 dialog.dismiss()
             }
-            /* materialAlertDialogBuilder.setNeutralButton(R.string.cancel) { dialog, _ ->
-                 dialog.cancel()
-             }*/
             materialAlertDialogBuilder.show()
         }
     }
@@ -194,6 +208,11 @@ class MainFragment : Fragment() {
                 updateBtn_BS.isEnabled = true
                 bottom_text.text = ""
             }
+        }
+        if(task.completed){
+            updateBtn_BS.isEnabled = true
+            bottom_text.text = "Done"
+            bottom_text.setTextColor(resources.getColor(R.color.green))
         }
     }
 

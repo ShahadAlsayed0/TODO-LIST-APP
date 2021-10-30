@@ -67,6 +67,9 @@ class Adapter(
 
     private fun checkItem(task: Task, holder: ItemAdapter) {
         if (!task.dueDate.isNullOrEmpty()) {//in the start
+
+           val duedate=holder.dDateTextView.text.toString()
+            val currentdate= getCurrentDate()
             if (holder.dDateTextView.text.toString() < getCurrentDate() && !holder.checkbox.isChecked) {
                 holder.checkbox.isEnabled = false
                 holder.itemlayout.background =

@@ -6,18 +6,21 @@
 
 ## :scroll: Description
 ---
-This is my application description, what you have learned and what you, and what the ideas you have added in this app
+//This is my application description, what you have learned and what you, and what the ideas you have added in this app
 
+This is a To do list app
+It’s a list of tasks you need to complete, or things that you want to do.
+you can add, edit and delete tasks
 
 ## :bulb: Motivation and Context
 ---
-Write your motivation here
+//Write your motivation here
 
 
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
-<img src="/results/screenshot_1.png" width="260">
+<img src="/results/empty.jpg" width="260">
 
 ### screenshot_2
-<img src="/results/screenshot_2.png" width="260">
+<img src="/results/screenshot_2.jpg" width="260">
