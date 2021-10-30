@@ -20,7 +20,7 @@ you can add, edit and delete tasks
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
-<img src="/results/empty.jpg" width="260">
+<img src="app/src/main/res/drawable/result/results/empty.jpg" width="260">
 
 ### screenshot_2
 <img src="/results/screenshot_2.jpg" width="260">
