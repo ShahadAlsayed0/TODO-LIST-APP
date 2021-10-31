@@ -9,34 +9,19 @@
         android:id="@+id/mainFragment"
         android:name="com.example.todolistapp.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
         <action
             android:id="@+id/action_mainFragment_to_dialogWithData"
             app:destination="@id/dialogWithData" />
-        <argument
-            android:name="dialog_ended"
-            app:argType="boolean" />
-
     </fragment>
-    <fragment
-        android:id="@+id/addTaskFragment"
-        android:name="com.example.todolistapp.ui.add.AddTaskFragment"
-        android:label="add_task_fragment"
-        tools:layout="@layout/add_task_fragment" >
-        <action
-            android:id="@+id/action_addTaskFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-
-    </fragment>
-
     <dialog
         android:id="@+id/dialogWithData"
         android:name="com.example.todolistapp.ui.update.DialogWithData"
         android:label="fragment_dialog_with_data"
-        tools:layout="@layout/fragment_dialog_with_data" >
+        tools:layout="@layout/fragment_dialog_with_data">
         <action
             android:id="@+id/action_dialogWithData_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -44,5 +29,15 @@
             android:name="original_task"
             app:argType="com.example.todolistapp.database.model.Task" />
     </dialog>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.todolistapp.ui.add.AddTaskFragment"
+        android:label="add_task_fragment"
+        tools:layout="@layout/add_task_fragment">
+        <action
+            android:id="@+id/action_addTaskFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
 
 </navigation>

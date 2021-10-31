@@ -13,6 +13,7 @@ you can add, edit, delete and sort tasks
 
 Concepts that have been implemented:
 
+
 Recycler View, Fragments, Fragments Navigation, View Model, Repository Pattern, Live Data, Room Database, Coroutines, Parcelize, Extensions, Bottom sheet, Sort through data from Room
 
 ## :bulb: Motivation and Context
@@ -22,14 +23,14 @@ This application was made for - Tuwaiq Academy 'Android Capstone 1 Assignment'
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
-<img src="app/src/main/res/drawable/result/empty.JPG" width="260"> <img src="app/src/main/res/drawable/result/list.JPG" width="260">
+<img src="app/src/main/res/drawable/result/empty.png" width="260"> <img src="app/src/main/res/drawable/result/list.png" width="260">
 
 ### screenshot_2
-<img src="app/src/main/res/drawable/result/done bottomsheet.JPG" width="260"> <img src="app/src/main/res/drawable/result/normal bottomsheet.JPG" width="260"> <img src="app/src/main/res/drawable/result/overdue bottomsheet.JPG" width="260">
+<img src="app/src/main/res/drawable/result/done bottomsheet.png" width="260"> <img src="app/src/main/res/drawable/result/normal bottomsheet.png" width="260"> <img src="app/src/main/res/drawable/result/overdue bottomsheet.png" width="260">
 
 ### screenshot_3
-<img src="app/src/main/res/drawable/result/add.JPG" width="260"> <img src="app/src/main/res/drawable/result/update dialog.JPG" width="260"> <img src="app/src/main/res/drawable/result/dalete alert.JPG" width="260">
+<img src="app/src/main/res/drawable/result/add.png" width="260"> <img src="app/src/main/res/drawable/result/update dialog.png" width="260"> <img src="app/src/main/res/drawable/result/dalete alert.png" width="260">
 
 ### screenshot_4
-<img src="app/src/main/res/drawable/result/sort list.JPG" width="260">
+<img src="app/src/main/res/drawable/result/sort list.png" width="260">
 
