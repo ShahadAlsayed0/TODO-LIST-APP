@@ -19,7 +19,7 @@ Recycler View, Fragments, Fragments Navigation, View Model, Repository Pattern, 
 ## :bulb: Motivation and Context
 ---
 
-This application was made for - Tuwaiq Academy 'Android Capstone 1 Assignment' 
+This application was made for - Tuwaiq Academy 'Android Capstone 1 Assignment' - with One week deadline-
 ## :camera_flash: Screenshots
 ---
 ### screenshot_1
